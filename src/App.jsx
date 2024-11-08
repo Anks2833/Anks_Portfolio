@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import Page1 from './pages/Page1';
 import Sidebar from './components/Sidebar';
 import SidebarTrigger from './components/SidebarTrigger';
+import Page2 from './pages/Page2';
+import Page3 from './pages/Page3';
 
 const App = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -63,6 +65,8 @@ const App = () => {
     <div className='w-full min-h-screen bg-[#0B0D0C]'>
       <Sidebar isVisible={isSidebarVisible} onClose={closeSidebar} />
       <Page1 />
+      <Page2 />
+      <Page3 />
       <SidebarTrigger onClick={toggleSidebar} isVisible={isSidebarVisible} />
 
       {/* The Custom Cursor */}
@@ -73,11 +77,11 @@ const App = () => {
           zIndex: '100',
           top: 0,
           left: 0, 
-          width: '3vw',
-          height: '3vw',
+          width: '1vw',
+          height: '1vw',
           borderRadius: '50%',
-          backgroundColor: 'transparent',
-          border: '2px solid lime',
+          backgroundColor: 'lime',
+          // border: '2px solid lime',
           pointerEvents: 'none',
           transform: 'translate(-50%, -50%)',
         }}

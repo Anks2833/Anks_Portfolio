@@ -15,7 +15,7 @@ const Sidebar = ({ isVisible, onClose }) => {
     ]
 
     return (
-        <div className={`sidebar absolute z-10 w-full h-screen bg-white flex justify-start transition-all ${isVisible ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`sidebar fixed z-10 w-full h-screen bg-zinc-900 flex justify-start transition-all ${isVisible ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className='w-12 h-screen'>
                 <SidebarLinks />
             </div>
@@ -29,7 +29,7 @@ const Sidebar = ({ isVisible, onClose }) => {
             <div className='absolute left-32 top-12 flex flex-col gap-16'>
                 {navLinks.map((nav) => {
                     return (
-                            <div key={nav.id} className='w-[40vw] flex items-start gap-3 border-b border-b-white text-zinc-300 hover:text-blue-500 hover:border-b-blue-600 hover:italic'>
+                            <div key={nav.id} className='w-[40vw] flex items-start gap-3 border-b border-b-white text-zinc-300 hover:text-[#BFFF00] hover:border-b-[#BFFF00] hover:italic'>
 
                                 <h1 className='text-[3.5vw] font-semibold'>{nav.name}</h1>
                                 <h1 className='text-3xl mt-2'>{nav.id}</h1>

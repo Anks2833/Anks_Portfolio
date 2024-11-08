@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
 const Page1Content = () => {
@@ -11,11 +11,11 @@ const Page1Content = () => {
             const x = clientX - (left + width / 2);
             const y = clientY - (top + height / 2);
 
-            // Calculate rotation based on mouse position
+            
             const rotateX = (y / height) * 50;
             const rotateY = -(x / width) * 70;
 
-            // Apply the transformations
+            
             gsap.to(contentRef.current, {
                 rotateX: rotateX,
                 rotateY: rotateY,
@@ -25,7 +25,6 @@ const Page1Content = () => {
         };
 
         const handleMouseLeave = () => {
-            // Immediately reset rotation when mouse leaves
             gsap.set(contentRef.current, {
                 rotateX: 0,
                 rotateY: 0,
@@ -56,9 +55,9 @@ const Page1Content = () => {
                 <p className='text-[5vw] text-center font-light tracking-wider'>
                     <span className='italic'>"Hello, I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
                 </p>
-                <p className='text-[5vw] text-center font-bold text-zinc-950 bg-white w-fit tracking-wider'>FULLSTACK WEB DEVELOPER</p>
+                <p className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'>FULLSTACK WEB DEVELOPER</p>
                 <p className='text-[5vw] text-center font-light italic tracking-wider'>based in India, I'm also specialized in</p>
-                <p className='text-[5vw] text-center font-bold text-zinc-950 bg-white w-fit tracking-wider'>
+                <p className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'>
                     GAME DEVELOPMENT<span className='font-light italic text-black'>"</span>
                 </p>
             </div>
