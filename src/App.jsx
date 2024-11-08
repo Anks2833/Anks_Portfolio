@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import Page1 from './pages/Page1';
 import Sidebar from './components/Sidebar';

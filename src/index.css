@@ -2,13 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Set the default cursor for the entire application */
+
 html, body {
   cursor: default;
+  overflow: hidden;
 }
 
 *::selection {
   cursor: default;
-  background-color: white;
-  color: black;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+html {
+  scrollbar-width: none;
+}
+
+
+body {
+  -ms-overflow-style: none;
 }
