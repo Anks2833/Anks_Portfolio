@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className='w-full h-[6vw] flex justify-between items-center px-16 text-white'>
         
-        <h1 className='text-[2vw] font-extrabold italic'>AD</h1>
+        <h1 className='text-[2.6vw] font-extrabold italic'>AD</h1>
 
         <div className='flex gap-2 items-center'>
             <h1 className='italic text-[1.2vw] font-extralight'>CONNECT WITH ME</h1>
