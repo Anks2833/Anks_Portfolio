@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Set the default cursor for the entire application */
+html, body {
+  cursor: default;
+}
+
+*::selection {
+  cursor: default;
+  background-color: white;
+  color: black;
+}
