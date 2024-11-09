@@ -20,8 +20,22 @@ const AnimatedMarquee = () => {
         <SiBlender className="hover:text-lime-400" key="blender" />,
     ];
 
+    const iconName = [
+        <h1 className="icon-name font-semibold" key="html">HTML</h1>,
+        <h1 className="icon-name font-semibold" key="css">CSS</h1>,
+        <h1 className="icon-name font-semibold" key="js">JAVASCRIPT</h1>,
+        <h1 className="icon-name font-semibold" key="ts">TYPESCRIPT</h1>,
+        <h1 className="icon-name font-semibold" key="react">REACT.js</h1>,
+        <h1 className="icon-name font-semibold" key="next">NEXT.js</h1>,
+        <h1 className="icon-name font-semibold" key="threejs">Three.js</h1>,
+        <h1 className="icon-name font-semibold" key="node">Node.js</h1>,
+        <h1 className="icon-name font-semibold" key="mongodb">MONGODB</h1>,
+        <h1 className="icon-name font-semibold" key="unity">UNITY</h1>,
+        <h1 className="icon-name font-semibold" key="blender">BLENDER</h1>,
+    ];
+
     return (
-        <div className="realtive overflow-hidden whitespace-nowrap">
+        <div className="realtive whitespace-nowrap">
 
             {/* right div */}
             <div className="absolute -left-[2vw] z-[2] w-32 h-32 bg-[#0B0D0C] blur-lg"></div>
@@ -58,8 +72,8 @@ const AnimatedMarquee = () => {
                         repeat: Infinity,
                     }}
                 >
-                    {icons}
-                    {icons}
+                    {iconName}
+                    {iconName}
                 </motion.div>
             </div>
         </div>

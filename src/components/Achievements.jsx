@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom"
 
 
 const Achievements = () => {
@@ -17,7 +16,7 @@ const Achievements = () => {
             return (
                 <h1 
                 key={ach.id} 
-                className={`achievements italic text-4xl border-t border-t-white py-12 ${ach.id === "04" && "border-b border-b-white"} overflow-hidden hover:text-black`} 
+                className={`achievements italic text-4xl border-t border-t-[#BFFF00] py-12 ${ach.id === "04" && "border-b border-b-[#BFFF00]"} overflow-hidden hover:text-black`} 
                 style={{ '--content': `"${ach.id}. ${ach.name}"` }}
             >
                 {ach.id}. {ach.name}
