@@ -6,7 +6,7 @@ const Page2 = () => {
         <div className='relative w-full h-screen bg-[#0B0D0C] text-white pt-12 flex flex-col items-center gap-16'>
 
 
-            <h1 className='page2-heading text-5xl'>DO YOU REALLY KNOW ME?</h1>
+            <h1 className='page2-heading w-full flex justify-start pl-32 tracking-widest text-5xl'>DO YOU REALLY KNOW ME?</h1>
 
             <div className="w-full flex flex-col justify-start items-start pl-32 text-4xl">
                 <p>I am Ankur Dubey, a self-taught Full-Stack</p>

@@ -69,3 +69,23 @@ html, body {
 .achievements:hover::before {
   transform: translateY(-91%);
 }
+
+.scroll-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
