@@ -34,3 +34,24 @@ html, body {
   top: 3.2vw;
   color: white;
 } */
+
+.achievements {
+  position: relative;
+  overflow: hidden;
+}
+
+.achievements::before {
+  content: var(--content);
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 20vh;
+  padding-top: 3vw;
+  background-color: white;
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+}
+
+.achievements:hover::before {
+  transform: translateY(-91%);
+}
