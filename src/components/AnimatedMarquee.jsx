@@ -48,15 +48,16 @@ const AnimatedMarquee = () => {
                 <motion.div
                     className="w-[100vw] flex gap-10 text-5xl"
                     initial={{ x: "100%" }} // Start from the right
-                    animate={{ x: ["100%", "-100%"] }} // Move from right to left
+                    animate={{ x: ["0%", "-100%"] }} // Move from right to left
                     transition={{
                         duration: 30,
                         ease: "linear",
                         repeat: Infinity,
                     }}
                 >
-                    {icons}
-                    {icons}
+                    {iconName}
+                    {iconName}
+                    {iconName}
                 </motion.div>
             </div>
 
@@ -65,13 +66,14 @@ const AnimatedMarquee = () => {
                 <motion.div
                     className="w-[100vw] flex gap-10 text-5xl mt-4"
                     initial={{ x: "-100%" }} // Start from the left
-                    animate={{ x: ["-100%", "100%"] }} // Move from left to right
+                    animate={{ x: ["-100%", "0%"] }} // Move from left to right
                     transition={{
                         duration: 30,
                         ease: "linear",
                         repeat: Infinity,
                     }}
                 >
+                    {iconName}
                     {iconName}
                     {iconName}
                 </motion.div>

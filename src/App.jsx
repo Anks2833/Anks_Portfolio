@@ -1,24 +1,36 @@
 import { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import { motion } from 'framer-motion'; // Import Framer Motion
 import Page1 from './pages/Page1';
 import Sidebar from './components/Sidebar';
 import SidebarTrigger from './components/SidebarTrigger';
 import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
+import Page4 from './pages/Page4';
 
 const App = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
       setCursorPosition({ x: event.clientX, y: event.clientY });
     };
 
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      setScrollProgress(progress);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -63,10 +75,24 @@ const App = () => {
 
   return (
     <div className='w-full min-h-screen bg-[#0B0D0C]'>
+      {/* Scroll Progress Bar */}
+      <motion.div 
+        className="scroll-progress" 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          height: '5px',
+          width: `${scrollProgress}%`,
+          backgroundColor: '#BFFF00',
+          zIndex: 101
+        }}
+      />
       <Sidebar isVisible={isSidebarVisible} onClose={closeSidebar} />
       <Page1 />
       <Page2 />
       <Page3 />
+      <Page4 />
       <SidebarTrigger onClick={toggleSidebar} isVisible={isSidebarVisible} />
 
       {/* The Custom Cursor */}
@@ -81,7 +107,6 @@ const App = () => {
           height: '1vw',
           borderRadius: '50%',
           backgroundColor: 'lime',
-          // border: '2px solid lime',
           pointerEvents: 'none',
           transform: 'translate(-50%, -50%)',
         }}

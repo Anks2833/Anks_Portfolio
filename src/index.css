@@ -38,15 +38,15 @@ html, body {
 .icon-name {
   color: black; /* Set text color to black */
   text-shadow: 
-    -1px -1px 0 #BFFF00,  
-    1px -1px 0 #BFFF00,
-    -1px 1px 0 #BFFF00,
-    1px 1px 0 #BFFF00;
+    -1px -1px 0 #fff,  
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
 }
 
 .icon-name:hover{
   color: #BFFF00;
-  transition: all;
+  text-shadow: none;
 }
 
 .achievements {

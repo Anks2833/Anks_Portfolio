@@ -4,8 +4,8 @@ const SidebarLinks = () => {
 
     const socialData = [
         { id: "1", name: "LINKEDIN", icon: <BsArrowDownRight /> },
-        { id: "1", name: "INSTAGRAM", icon: <BsArrowDownRight /> },
-        { id: "1", name: "GITHUB", icon: <BsArrowDownRight /> },
+        { id: "2", name: "INSTAGRAM", icon: <BsArrowDownRight /> },
+        { id: "3", name: "GITHUB", icon: <BsArrowDownRight /> },
     ]
 
     return (
