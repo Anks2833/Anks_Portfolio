@@ -1,4 +1,4 @@
-
+import { handleMouseEnterBig, handleMouseLeave } from '../utils/cursorEffects';
 
 const Achievements = () => {
 
@@ -18,6 +18,8 @@ const Achievements = () => {
                 key={ach.id} 
                 className={`achievements italic text-4xl border-t border-t-[#BFFF00] py-12 ${ach.id === "04" && "border-b border-b-[#BFFF00]"} overflow-hidden hover:text-black hover:transition-all`} 
                 style={{ '--content': `"${ach.id}. ${ach.name}"` }}
+                onMouseEnter={handleMouseEnterBig}
+                onMouseLeave={handleMouseLeave}
             >
                 {ach.id}. {ach.name}
             </h1>

@@ -1,3 +1,4 @@
+import { handleMouseEnter, handleMouseLeave } from '../utils/cursorEffects';
 import { BsArrowDownRight } from "react-icons/bs";
 
 const SidebarLinks = () => {
@@ -13,7 +14,12 @@ const SidebarLinks = () => {
 
             {socialData.map(item => {
                 return (
-                    <div key={item.id} className='h-1/3 bg-black text-white border flex flex-col justify-between items-center py-12 hover:translate-x-2 hover:translate-y-2 transition-all'>
+                    <div
+                        key={item.id}
+                        className='h-1/3 bg-black text-white border flex flex-col justify-between items-center py-12 hover:translate-x-2 hover:translate-y-2 transition-all'
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <h1 className='rotate-90 text-lg'>{item.name}</h1>
                         <div>{item.icon}</div>
                     </div>

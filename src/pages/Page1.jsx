@@ -37,7 +37,6 @@ const Page1 = () => {
 
         {/* Scroll to explore div */}
           <div className={`flex items-start gap-2 ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}>
-          {/* Animated div using Framer Motion */}
           <motion.div
             className='bg-white w-[0.01vw] h-16 origin-top'
             animate={{ scaleY: [0, 1, 0], opacity: 0 }}

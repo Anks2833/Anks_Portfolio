@@ -1,4 +1,5 @@
 import { GoArrowUpRight } from "react-icons/go";
+import { handleMouseEnterBig, handleMouseLeave } from '../utils/cursorEffects';
 import { NavLink } from "react-router-dom";
 
 const ScrollingCards = () => {
@@ -30,7 +31,12 @@ const ScrollingCards = () => {
         <>
             {cardData.map((dat) => {
                 return (
-                    <div key={dat.id} className='relative w-[25vw] h-[32vw] rounded-2xl overflow-hidden group'>
+                    <div
+                        key={dat.id}
+                        className='relative w-[25vw] h-[32vw] rounded-2xl overflow-hidden group'
+                        onMouseEnter={handleMouseEnterBig}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <img src={dat.image} alt={dat.title} className="w-full h-full object-cover" />
 
                         {/* Content container that will show on hover */}

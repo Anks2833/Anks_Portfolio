@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
-import { motion } from 'framer-motion'; // Import Framer Motion
+import { motion } from 'framer-motion';
 import Page1 from './pages/Page1';
 import Sidebar from './components/Sidebar';
 import SidebarTrigger from './components/SidebarTrigger';
@@ -28,7 +28,7 @@ const App = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
@@ -37,6 +37,21 @@ const App = () => {
 
   useEffect(() => {
     gsap.to('.custom-cursor', {
+      x: cursorPosition.x,
+      y: cursorPosition.y,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+  }, [cursorPosition]);
+
+  useEffect(() => {
+    gsap.to('.custom-cursor', {
+      x: cursorPosition.x,
+      y: cursorPosition.y,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+    gsap.to('.large-cursor', {
       x: cursorPosition.x,
       y: cursorPosition.y,
       duration: 0.8,
@@ -77,8 +92,8 @@ const App = () => {
   return (
     <div className='w-full min-h-screen bg-[#0B0D0C]'>
       {/* Scroll Progress Bar */}
-      <motion.div 
-        className="scroll-progress" 
+      <motion.div
+        className="scroll-progress"
         style={{
           position: 'fixed',
           top: 0,
@@ -98,19 +113,36 @@ const App = () => {
       <SidebarTrigger onClick={toggleSidebar} isVisible={isSidebarVisible} />
 
       {/* The Custom Cursor */}
-      <div 
+      <div
         className="custom-cursor"
         style={{
           position: 'fixed',
           zIndex: '100',
           top: 0,
-          left: 0, 
+          left: 0,
           width: '1vw',
           height: '1vw',
           borderRadius: '50%',
-          backgroundColor: 'lime',
+          backgroundColor: '#BFFF00',
           pointerEvents: 'none',
           transform: 'translate(-50%, -50%)',
+        }}
+      />
+
+      <div
+        className="large-cursor"
+        style={{
+          position: 'fixed',
+          zIndex: '99',
+          top: 0,
+          left: 0,
+          width: '10vw',
+          height: '10vw',
+          filter: 'blur(80px)',
+          borderRadius: '50%',
+          backgroundColor: '#BFFF00',
+          pointerEvents: 'none',
+          transform: 'translate(-50%, -50%) translate(2vw, 2vw)',
         }}
       />
     </div>

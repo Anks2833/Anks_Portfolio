@@ -11,11 +11,9 @@ const Page1Content = () => {
             const x = clientX - (left + width / 2);
             const y = clientY - (top + height / 2);
 
-            
             const rotateX = (y / height) * 50;
             const rotateY = -(x / width) * 70;
 
-            
             gsap.to(contentRef.current, {
                 rotateX: rotateX,
                 rotateY: rotateY,
@@ -41,6 +39,25 @@ const Page1Content = () => {
         };
     }, []);
 
+    // Function to handle cursor hover effects
+    const handleMouseEnter = () => {
+        gsap.to('.custom-cursor', {
+            scale: 6,
+            backgroundColor: 'white',
+            duration: 0.3,
+            ease: 'power2.out',
+        });
+    };
+
+    const handleMouseLeave = () => {
+        gsap.to('.custom-cursor', {
+            scale: 1,
+            backgroundColor: '#BFFF00',
+            duration: 0.3,
+            ease: 'power2.out',
+        });
+    };
+
     return (
         <div className='w-full text-white flex justify-center'>
             <div
@@ -52,12 +69,32 @@ const Page1Content = () => {
                     position: 'relative',
                 }}
             >
-                <p className='text-[5vw] text-center font-light tracking-wider'>
+                <p 
+                    className='text-[5vw] text-center font-light tracking-wider'
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <span className='italic'>"Hello, I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
                 </p>
-                <p className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'>FULLSTACK WEB DEVELOPER</p>
-                <p className='text-[5vw] text-center font-light italic tracking-wider'>based in India, I'm also specialized in</p>
-                <p className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'>
+                <p 
+                    className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    FULLSTACK WEB DEVELOPER
+                </p>
+                <p 
+                    className='text-[5vw] text-center font-light italic tracking-wider'
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    based in India, I'm also specialized in
+                </p>
+                <p 
+                    className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     GAME DEVELOPMENT<span className='font-light italic text-black'>"</span>
                 </p>
             </div>
