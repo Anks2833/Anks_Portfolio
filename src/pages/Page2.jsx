@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import AnimatedMarquee from "../components/AnimatedMarquee"
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, useAnimations, Wireframe } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 import { handleCursorChangeStyle, handleMouseLeave } from "../utils/CursorEffects";
 
@@ -38,8 +38,6 @@ const Page2 = () => {
                 scale={[3, 3, 3]}
                 position={[1, -2.8, 0]}
                 rotation={[0.3, -0.5, 0]}
-                onPointerOver={handleCursorChangeStyle}
-                onPointerOut={handleMouseLeave}
             />
         );
     };
@@ -62,15 +60,18 @@ const Page2 = () => {
                 </div>
             </div>
 
-            <div className="absolute z-[100] w-[32vw] h-[25vw] right-20">
-                <Canvas className="w-full h-full">
+            <div className="absolute z-[9] w-[32vw] h-[25vw] right-20 pointer-events-none">
+                <Canvas className="w-full h-full pointer-events-none">
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
                     <Model />
                 </Canvas>
             </div>
 
-            <div className="absolute z-[110] -right-8 top-36 flex flex-col items-center">
+            <div
+            onMouseEnter={handleCursorChangeStyle} 
+            onMouseLeave={handleMouseLeave} 
+            className="absolute z-[10] -right-8 top-36 flex flex-col items-center">
                 <h1 className="text-white text-[2vw] tracking-[5vw] px-5 py-2">HOVER</h1>
                 <h1 className="text-white text-[3vw] tracking-[10vw] ml-20 px-5 py-2">ME</h1>
             </div>

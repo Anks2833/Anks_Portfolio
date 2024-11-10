@@ -14,7 +14,7 @@ const Sidebar = ({ isVisible, onClose }) => {
     ];
 
     return (
-        <div className={`sidebar fixed z-10 w-full h-screen bg-zinc-900 flex justify-start transition-all ${isVisible ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`sidebar fixed z-[11] w-full h-screen bg-zinc-950 flex justify-start transition-all ${isVisible ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className='w-12 h-screen'>
                 <SidebarLinks />
             </div>

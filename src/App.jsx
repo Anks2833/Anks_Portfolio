@@ -8,8 +8,10 @@ import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
 import Page4 from './pages/Page4';
 import Page5 from './pages/Page5';
+import PreLoader from './components/PreLoader';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -17,18 +19,24 @@ const App = () => {
   const scrollProgressRef = useRef(null);
 
   useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+
+    return () => clearTimeout(loadingTimeout);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       console.log(`Scroll X: ${window.scrollX}, Scroll Y: ${window.scrollY}`);
     };
 
-    
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -58,15 +66,6 @@ const App = () => {
       duration: 0.8,
       ease: 'power2.out'
     });
-  }, [cursorPosition]);
-
-  useEffect(() => {
-    gsap.to('.custom-cursor', {
-      x: cursorPosition.x,
-      y: cursorPosition.y,
-      duration: 0.8,
-      ease: 'power2.out'
-    });
     gsap.to('.large-cursor', {
       x: cursorPosition.x,
       y: cursorPosition.y,
@@ -75,7 +74,6 @@ const App = () => {
     });
   }, [cursorPosition]);
 
-  // Function to toggle sidebar visibility
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
     gsap.to('.sidebar', {
@@ -90,7 +88,6 @@ const App = () => {
     });
   };
 
-  // Function to close the sidebar
   const closeSidebar = () => {
     setIsSidebarVisible(false);
     gsap.to('.sidebar', {
@@ -105,17 +102,17 @@ const App = () => {
     });
   };
 
-  // Function to handle page change
   const handlePageChange = (page) => {
     closeSidebar();
     setCurrentPage(page);
   };
 
-
+  if (loading) {
+    return <PreLoader />;
+  }
 
   return (
     <div className='w-full min-h-screen bg-[#0B0D0C]'>
-      {/* Scroll Progress Bar */}
       <motion.div
         className="scroll-progress"
         style={{
@@ -136,7 +133,6 @@ const App = () => {
       <Page5 />
       <SidebarTrigger onClick={toggleSidebar} isVisible={isSidebarVisible} />
 
-      {/* The Custom Cursor */}
       <div
         className="custom-cursor"
         style={{
@@ -170,7 +166,7 @@ const App = () => {
         }}
       />
     </div>
-  )
-}
+  );
+};
 
 export default App;
