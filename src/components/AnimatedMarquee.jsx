@@ -38,10 +38,10 @@ const AnimatedMarquee = () => {
         <div className="realtive whitespace-nowrap">
 
             {/* right div */}
-            <div className="absolute -left-[2vw] z-[2] w-32 h-32 bg-[#0B0D0C] blur-lg"></div>
+            <div className="absolute -left-[3vw] -bottom-12 z-[2] w-52 h-52 bg-[#0B0D0C] blur-md rounded-full"></div>
 
             {/* left div */}
-            <div className="absolute left-[93vw] z-[3] w-32 h-32 bg-[#0B0D0C] blur-lg"></div>
+            <div className="absolute left-[93vw] -bottom-12 z-[3] w-52 h-52 bg-[#0B0D0C] blur-lg rounded-full"></div>
 
             {/* Right to Left Marquee */}
             <div className="flex items-center gap-5">
