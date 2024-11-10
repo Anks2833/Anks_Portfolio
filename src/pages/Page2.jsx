@@ -1,15 +1,16 @@
 import { useEffect, useRef } from "react";
 import AnimatedMarquee from "../components/AnimatedMarquee"
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, useAnimations  } from '@react-three/drei';
+import { useGLTF, useAnimations, Wireframe } from '@react-three/drei';
 import * as THREE from 'three';
+import { handleCursorChangeStyle, handleMouseLeave } from "../utils/CursorEffects";
 
 
 const Page2 = () => {
 
     const Model = () => {
         const actionRef = useRef();
-        const { scene, animations } = useGLTF('../../Models/Man.glb');
+        const { scene, animations } = useGLTF('../../Models/Man_Talking.glb');
         const { actions } = useAnimations(animations, scene);
 
         // To know animation name
@@ -20,23 +21,25 @@ const Page2 = () => {
                 });
             }
         }, [animations]);
-    
-        
+
+
         useEffect(() => {
-            if (actions && actions['Armature|mixamo.com|Layer0']) {
-                actionRef.current = actions['Armature|mixamo.com|Layer0'];
+            if (actions && actions['Armature|mixamo.com|Layer0.001']) {
+                actionRef.current = actions['Armature|mixamo.com|Layer0.001'];
                 actionRef.current.setLoop(THREE.LoopRepeat, Infinity);
                 actionRef.current.play();
             }
         }, [actions]);
- 
-    
+
+
         return (
             <primitive
                 object={scene}
-                scale={[3.2, 3.2, 3.2]}
-                position={[-1, -3, 0]}
-                rotation={[0.3, 0.3, 0]}
+                scale={[3, 3, 3]}
+                position={[1, -2.8, 0]}
+                rotation={[0.3, -0.5, 0]}
+                onPointerOver={handleCursorChangeStyle}
+                onPointerOut={handleMouseLeave}
             />
         );
     };
@@ -64,8 +67,12 @@ const Page2 = () => {
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
                     <Model />
-                    {/* <OrbitControls /> */}
                 </Canvas>
+            </div>
+
+            <div className="absolute z-[110] -right-8 top-36 flex flex-col items-center">
+                <h1 className="text-white text-[2vw] tracking-[5vw] px-5 py-2">HOVER</h1>
+                <h1 className="text-white text-[3vw] tracking-[10vw] ml-20 px-5 py-2">ME</h1>
             </div>
 
         </div>

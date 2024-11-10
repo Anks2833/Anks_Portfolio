@@ -27,3 +27,12 @@ export const handleMouseLeave = () => {
         ease: 'power2.out',
     });
 };
+
+export const handleCursorChangeStyle = () =>{
+    gsap.to('.custom-cursor', {
+        scale: 3,
+        backgroundColor: '#fff',
+        duration: 0.3,
+        ease: 'power2.out',
+    });
+}
