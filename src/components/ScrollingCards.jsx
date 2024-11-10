@@ -1,5 +1,5 @@
 import { GoArrowUpRight } from "react-icons/go";
-import { handleMouseEnterBig, handleMouseLeave } from '../utils/cursorEffects';
+import { handleMouseEnterBig, handleMouseLeave } from '../utils/CursorEffects';
 import { NavLink } from "react-router-dom";
 
 const ScrollingCards = () => {

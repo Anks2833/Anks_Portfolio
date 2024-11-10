@@ -1,4 +1,4 @@
-import { handleMouseEnterBig, handleMouseLeave } from '../utils/cursorEffects';
+import { handleMouseEnterBig, handleMouseLeave } from '../utils/CursorEffects';
 
 const Achievements = () => {
 

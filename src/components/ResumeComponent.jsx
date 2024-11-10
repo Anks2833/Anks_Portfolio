@@ -1,4 +1,4 @@
-import { handleMouseEnter, handleMouseLeave } from '../utils/cursorEffects';
+import { handleMouseEnter, handleMouseLeave } from '../utils/CursorEffects';
 import { CiFileOn } from "react-icons/ci";
 
 const ResumeComponent = () => {

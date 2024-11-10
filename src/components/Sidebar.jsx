@@ -1,6 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import SidebarLinks from './SidebarLinks';
-import { handleMouseEnter, handleMouseLeave } from '../utils/cursorEffects';
+import { handleMouseEnter, handleMouseLeave } from '../utils/CursorEffects';
 
 
 const Sidebar = ({ isVisible, onClose }) => {

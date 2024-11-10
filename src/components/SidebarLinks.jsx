@@ -1,4 +1,4 @@
-import { handleMouseEnter, handleMouseLeave } from '../utils/cursorEffects';
+import { handleMouseEnter, handleMouseLeave } from '../utils/CursorEffects';
 import { BsArrowDownRight } from "react-icons/bs";
 
 const SidebarLinks = () => {
