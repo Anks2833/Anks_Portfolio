@@ -28,7 +28,7 @@ const Page1 = () => {
   }, []);
 
   return (
-    <div>
+    <div id='home'>
       <Navbar />
       <Page1Content />
 

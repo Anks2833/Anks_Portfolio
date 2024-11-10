@@ -5,7 +5,7 @@ import ResumeComponent from "../components/ResumeComponent"
 const Page5 = () => {
     return (
 
-        <div className='relative w-full h-screen text-white flex flex-col pt-20'>
+        <div id="contact" className='relative w-full h-screen text-white flex flex-col pt-20'>
 
             <div className="flex flex-col items-start px-20 leading-none">
                 <h1 className="text-[8vw] italic">LET'S CONNECT</h1>

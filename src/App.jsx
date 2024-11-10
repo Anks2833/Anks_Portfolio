@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
 import Page1 from './pages/Page1';
@@ -13,6 +13,22 @@ const App = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [currentPage, setCurrentPage] = useState('Page1');
+  const scrollProgressRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log(`Scroll X: ${window.scrollX}, Scroll Y: ${window.scrollY}`);
+    };
+
+    
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -89,6 +105,14 @@ const App = () => {
     });
   };
 
+  // Function to handle page change
+  const handlePageChange = (page) => {
+    closeSidebar();
+    setCurrentPage(page);
+  };
+
+
+
   return (
     <div className='w-full min-h-screen bg-[#0B0D0C]'>
       {/* Scroll Progress Bar */}
@@ -104,7 +128,7 @@ const App = () => {
           zIndex: 101
         }}
       />
-      <Sidebar isVisible={isSidebarVisible} onClose={closeSidebar} />
+      <Sidebar isVisible={isSidebarVisible} onClose={closeSidebar} onPageChange={handlePageChange} />
       <Page1 />
       <Page2 />
       <Page3 />

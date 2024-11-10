@@ -3,7 +3,7 @@ import AnimatedMarquee from "../components/AnimatedMarquee"
 
 const Page2 = () => {
     return (
-        <div className='relative w-full h-screen bg-[#0B0D0C] text-white pt-12 flex flex-col items-center gap-16'>
+        <div id="about" className='relative w-full h-screen bg-[#0B0D0C] text-white pt-12 flex flex-col items-center gap-16'>
 
 
             <h1 className='page2-heading w-full flex justify-start pl-32 tracking-widest text-5xl'>DO YOU REALLY KNOW ME?</h1>

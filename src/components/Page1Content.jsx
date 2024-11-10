@@ -39,7 +39,6 @@ const Page1Content = () => {
         };
     }, []);
 
-    // Function to handle cursor hover effects
     const handleMouseEnter = () => {
         gsap.to('.custom-cursor', {
             scale: 6,

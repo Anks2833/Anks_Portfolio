@@ -1,17 +1,17 @@
-import { Routes, Route } from 'react-router-dom'
-import App from '../App'
+import { Routes, Route } from 'react-router-dom';
+import Page1 from '../pages/Page1';
+import Page2 from '../pages/Page2';
+import Page3 from '../pages/Page3';
+import Page4 from '../pages/Page4';
+import Page5 from '../pages/Page5';
+import App from '../App';
 
-
-const routing = () => {
+const Routing = () => {
   return (
-    <div>
-        
     <Routes>
-        <Route path='/' Component={App} />
+        <Route path='/' element={<App />} />
     </Routes>
-
-    </div>
-  )
+  );
 }
 
-export default routing
+export default Routing;
