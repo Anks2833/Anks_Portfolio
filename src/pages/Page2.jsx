@@ -4,7 +4,6 @@ import { Canvas } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 import { handleCursorChangeStyle, handleMouseLeave } from "../utils/CursorEffects";
-import { Link } from "react-router-dom";
 
 
 const Page2 = () => {
@@ -14,7 +13,7 @@ const Page2 = () => {
     const Model = useMemo(() => {
         const ModelComponent = () => {
             const actionRef = useRef();
-            const { scene, animations } = useGLTF('../../Models/Man_Talking.glb');
+            const { scene, animations } = useGLTF('../../Models/Bot_Yelling.glb');
             const { actions } = useAnimations(animations, scene);
 
             // To know animation name
@@ -27,8 +26,8 @@ const Page2 = () => {
             }, [animations]);
 
             useEffect(() => {
-                if (actions && actions['Armature|mixamo.com|Layer0.001']) {
-                    actionRef.current = actions['Armature|mixamo.com|Layer0.001'];
+                if (actions && actions['Armature|mixamo.com|Layer0']) {
+                    actionRef.current = actions['Armature|mixamo.com|Layer0'];
                     actionRef.current.setLoop(THREE.LoopRepeat, Infinity);
                     actionRef.current.play();
                 }
@@ -62,8 +61,8 @@ const Page2 = () => {
             </div>
             <div className="absolute z-[9] w-[32vw] h-[25vw] right-20 pointer-events-none">
                 <Canvas className="w-full h-full pointer-events-none">
-                    <ambientLight />
-                    <pointLight position={[10, 10, 10]} />
+                    <ambientLight intensity={0.3} />
+                    <directionalLight position={[10, 10, 10]} intensity={2} />
                     <Model />
                 </Canvas>
             </div>
