@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import AnimatedMarquee from "../components/AnimatedMarquee"
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 
 
 const Page2 = () => {
+
+    const [hovered, setHovered] = useState(false);
+
     const Model = useMemo(() => {
         const ModelComponent = () => {
             const actionRef = useRef();
@@ -66,11 +69,11 @@ const Page2 = () => {
             </div>
             <a
                 href="https://anks-portfolio-3-d.vercel.app/"
-                onMouseEnter={handleCursorChangeStyle}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => { handleCursorChangeStyle(); setHovered(true); }}
+                onMouseLeave={() => { handleMouseLeave(); setHovered(false); }}
                 className="absolute z-[10] -right-8 top-36 flex flex-col items-center">
-                <h1 className="text-white text-[2vw] tracking-[5vw] px-5 py-2">HOVER</h1>
-                <h1 className="text-white text-[3vw] tracking-[10vw] ml-20 px-5 py-2">ME</h1>
+                <h1 className="text-white text-[2vw] tracking-[5vw] px-5 py-2">{hovered ? "CLICK" : "HOVER"}</h1>
+                <h1 className="text-white text-[3vw] tracking-[10vw] ml-20 px-5 py-2">{hovered ? "ME" : "ME"}</h1>
             </a>
         </div>
     );
