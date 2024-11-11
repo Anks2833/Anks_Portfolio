@@ -30,7 +30,7 @@ export const handleMouseLeave = () => {
 
 export const handleCursorChangeStyle = () =>{
     gsap.to('.custom-cursor', {
-        scale: 6,
+        scale: 8,
         backgroundColor: '#fff',
         duration: 0.3,
         ease: 'power2.out',
