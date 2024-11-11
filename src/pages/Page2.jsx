@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 import { handleCursorChangeStyle, handleMouseLeave } from "../utils/CursorEffects";
+import { Link } from "react-router-dom";
 
 
 const Page2 = () => {
@@ -63,13 +64,14 @@ const Page2 = () => {
                     <Model />
                 </Canvas>
             </div>
-            <div
-                onMouseEnter={handleCursorChangeStyle} 
-                onMouseLeave={handleMouseLeave} 
+            <a
+                href="https://anks-portfolio-3-d.vercel.app/"
+                onMouseEnter={handleCursorChangeStyle}
+                onMouseLeave={handleMouseLeave}
                 className="absolute z-[10] -right-8 top-36 flex flex-col items-center">
                 <h1 className="text-white text-[2vw] tracking-[5vw] px-5 py-2">HOVER</h1>
                 <h1 className="text-white text-[3vw] tracking-[10vw] ml-20 px-5 py-2">ME</h1>
-            </div>
+            </a>
         </div>
     );
 }
