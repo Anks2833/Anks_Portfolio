@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
+import Lenis from '@studio-freight/lenis'; // Import Lenis
 import Page1 from './pages/Page1';
 import Sidebar from './components/Sidebar';
 import SidebarTrigger from './components/SidebarTrigger';
@@ -27,14 +28,24 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      console.log(`Scroll X: ${window.scrollX}, Scroll Y: ${window.scrollY}`);
-    };
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2, // Smooth scroll duration
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function
+      smooth: true, // Enable smooth scrolling
+    });
 
-    window.addEventListener('scroll', handleScroll);
+    // Update Lenis on each frame
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
+    requestAnimationFrame(raf);
+
+    // Cleanup on unmount
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      lenis.destroy();
     };
   }, []);
 
@@ -133,6 +144,7 @@ const App = () => {
       <Page5 />
       <SidebarTrigger onClick={toggleSidebar} isVisible={isSidebarVisible} />
 
+      {/* The small cursor */}
       <div
         className="custom-cursor"
         style={{
@@ -149,7 +161,8 @@ const App = () => {
         }}
       />
 
-      <div
+      {/* The blurred cursor */}
+      {/* <div
         className="large-cursor"
         style={{
           position: 'fixed',
@@ -164,7 +177,7 @@ const App = () => {
           pointerEvents: 'none',
           transform: 'translate(-50%, -50%) translate(2vw, 2vw)',
         }}
-      />
+      /> */}
     </div>
   );
 };

@@ -1,46 +1,78 @@
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
 import { BsArrowUpRight } from "react-icons/bs";
+import { useRef } from "react";
 
 const Navbar = () => {
+  const underlineRef = useRef(null); // Ref for the underline
 
-  // Function to handle cursor hover effects
+  // Function to handle hover effect
   const handleMouseEnter = () => {
-    gsap.to('.custom-cursor', {
+    // Cursor animation
+    gsap.to(".custom-cursor", {
       scale: 2,
-      backgroundColor: 'white',
+      backgroundColor: "white",
       duration: 0.3,
-      ease: 'power2.out',
+      ease: "power2.out",
+    });
+
+    // Underline slides in
+    gsap.to(underlineRef.current, {
+      x: 0,
+      duration: 0.4,
+      ease: "power3.out",
     });
   };
 
   const handleMouseLeave = () => {
-    gsap.to('.custom-cursor', {
+    // Cursor animation
+    gsap.to(".custom-cursor", {
       scale: 1,
-      backgroundColor: '#BFFF00',
+      backgroundColor: "#BFFF00",
       duration: 0.3,
-      ease: 'power2.out',
+      ease: "power2.out",
+    });
+
+    // Underline slides out
+    gsap.to(underlineRef.current, {
+      x: "-100%",
+      duration: 0.4,
+      ease: "power3.in",
     });
   };
 
   return (
-    <div className='w-full h-[6vw] flex justify-between items-center px-16 text-white'>
-      <h1 className='text-[2.6vw] font-extrabold italic'>AD</h1>
+    <div className="w-full h-[6vw] flex justify-between items-center px-16 text-white">
+      {/* Logo */}
+      <h1 className="text-[2.6vw] font-extrabold italic">AD</h1>
 
+      {/* Connect with me */}
       <div
-        className='w-fit flex gap-2 items-center'
+        className="relative w-fit flex gap-2 items-center cursor-pointer overflow-hidden"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => {
-          window.scrollTo({ top: 3200, behavior: 'smooth' });
+          window.scrollTo({ top: 3200, behavior: "smooth" });
         }}
       >
-        <h1 className='italic text-[1.2vw] font-extralight'>CONNECT WITH ME</h1>
-        <div className='text-[1.5vw]'>
+        {/* Text */}
+        <h1 className="italic text-[1.2vw] font-extralight">CONNECT WITH ME</h1>
+        {/* Arrow */}
+        <div className="text-[1.5vw]">
           <BsArrowUpRight />
         </div>
+
+        {/* Underline */}
+        <div
+          ref={underlineRef}
+          className="absolute bottom-0 left-0 h-[1px] bg-white"
+          style={{
+            width: "100%",
+            transform: "translateX(-100%)", // Start hidden
+          }}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;
