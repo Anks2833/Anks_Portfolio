@@ -59,7 +59,7 @@ const Page2 = () => {
                     <AnimatedMarquee />
                 </div>
             </div>
-            <div className="absolute z-[9] w-[32vw] h-[25vw] right-20 pointer-events-none">
+            {/* <div className="absolute z-[9] w-[32vw] h-[25vw] right-20 pointer-events-none">
                 <Canvas className="w-full h-full pointer-events-none">
                     <ambientLight intensity={0.3} />
                     <directionalLight position={[10, 10, 10]} intensity={2} />
@@ -73,7 +73,7 @@ const Page2 = () => {
                 className="absolute z-[10] -right-8 top-36 flex flex-col items-center">
                 <h1 className="text-white text-[2vw] tracking-[5vw] px-5 py-2">{hovered ? "CLICK" : "HOVER"}</h1>
                 <h1 className="text-white text-[3vw] tracking-[10vw] ml-20 px-5 py-2">{hovered ? "ME" : "ME"}</h1>
-            </a>
+            </a> */}
         </div>
     );
 }

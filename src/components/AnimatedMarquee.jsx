@@ -1,24 +1,6 @@
 import { motion } from "framer-motion";
-import { FaHtml5, FaCss3Alt, FaReact, FaUnity } from "react-icons/fa";
-import { IoLogoJavascript, IoLogoNodejs } from "react-icons/io5";
-import { SiTypescript, SiMongodb, SiBlender } from "react-icons/si";
-import { RiNextjsFill } from "react-icons/ri";
-import { TbBrandThreejs } from "react-icons/tb";
 
 const AnimatedMarquee = () => {
-    const icons = [
-        <FaHtml5 className="hover:text-lime-400" key="html" />,
-        <FaCss3Alt className="hover:text-lime-400" key="css" />,
-        <IoLogoJavascript className="hover:text-lime-400" key="js" />,
-        <SiTypescript className="hover:text-lime-400" key="ts" />,
-        <FaReact className="hover:text-lime-400" key="react" />,
-        <RiNextjsFill className="hover:text-lime-400" key="next" />,
-        <TbBrandThreejs className="hover:text-lime-400" key="threejs" />,
-        <IoLogoNodejs className="hover:text-lime-400" key="node" />,
-        <SiMongodb className="hover:text-lime-400" key="mongodb" />,
-        <FaUnity className="hover:text-lime-400" key="unity" />,
-        <SiBlender className="hover:text-lime-400" key="blender" />,
-    ];
 
     const iconName = [
         <h1 className="icon-name font-semibold" key="html">HTML</h1>,

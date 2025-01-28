@@ -24,11 +24,12 @@ html, body {
     1px -1px 0 #fff,
     -1px 1px 0 #fff,
     1px 1px 0 #fff;
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition */
 }
 
-.icon-name:hover{
-  color: #BFFF00;
-  text-shadow: none;
+.icon-name:hover {
+  color: #BFFF00; /* Change text color on hover */
+  text-shadow: none; /* Remove text-shadow on hover */
 }
 
 .achievements {
