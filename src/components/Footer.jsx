@@ -13,6 +13,7 @@ const Footer = () => {
             <div className="flex items-center gap-8">
                 <NavLink
                     to="https://www.linkedin.com/in/ankur-dubey-025812217"
+                    className="grechen-fuemen-regular"
                     target='_blank'
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -22,6 +23,7 @@ const Footer = () => {
 
                 <NavLink
                     to="https://github.com/Anks2833"
+                    className="grechen-fuemen-regular"
                     target='_blank'
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -31,6 +33,7 @@ const Footer = () => {
 
                 <NavLink
                     to="https://www.instagram.com/_ankur._.dubey_/"
+                    className="grechen-fuemen-regular"
                     target='_blank'
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -42,7 +45,7 @@ const Footer = () => {
             </div>
 
             <div className='flex items-center gap-10'>
-                <h1>©{currentYear}</h1>
+                <h1 className='grechen-fuemen-regular'>©{currentYear}</h1>
 
                 <motion.div
                     onClick={() => {

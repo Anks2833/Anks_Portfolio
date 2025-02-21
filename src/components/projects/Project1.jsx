@@ -17,7 +17,9 @@ const Project1 = () => {
         {/* <h1 className='text-white mb-6 text-2xl font-semibold'>{cardData[0].title}</h1> */}
 
         <div className='image-1 w-full h-full bg-white p-6'>
-          <img src={cardData[0].image} alt={cardData[0].title} className="w-full h-full object-contain object-center" />
+          <div className='w-full h-full flex items-center'>
+            <img src={cardData[0].image} alt={cardData[0].title} className="w-full object-contain object-center border border-white p-2" />
+          </div>
         </div>
 
         {/* Content container that will show on hover */}

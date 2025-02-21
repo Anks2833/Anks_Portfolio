@@ -15,7 +15,9 @@ const Project5 = () => {
         onMouseLeave={handleMouseLeave}
       >
         <div className='image-5 w-full h-full bg-white p-6'>
-          <img src={cardData[4].image} alt={cardData[4].title} className="w-full h-full object-contain object-center" />
+          <div className='w-full h-full flex items-center'>
+            <img src={cardData[5].image} alt={cardData[5].title} className="w-full object-contain object-center border border-white p-2" />
+          </div>
         </div>
 
         {/* Content container that will show on hover */}

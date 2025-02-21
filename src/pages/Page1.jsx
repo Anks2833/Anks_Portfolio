@@ -13,7 +13,7 @@ const Page1 = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > 10) {
         setIsScrolled(true);
         console.log("Scrolled down")
       } else {
@@ -67,12 +67,14 @@ const Page1 = () => {
   };
 
   return (
-    <div id='home'>
+    <div id='home' className='relative w-full min-h-screen bg-[#0b0d0c]'>
       <Navbar />
       <Page1Content />
 
+      {/* <h1 className='text-white'>hey</h1> */}
+
       {/* The bottom content */}
-      <div className='absolute bottom-2 left-5 w-full flex justify-between px-5 pr-20'>
+      <div className='absolute bottom-28 w-full flex justify-between px-10 pr-20 text-white'>
 
         {/* Scroll to explore div */}
         <div className={`flex items-start gap-2 ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}>
@@ -87,8 +89,8 @@ const Page1 = () => {
           />
 
           <div className='flex flex-col text-white leading-none'>
-            <h1 className='font-extrabold text-[1vw]'>SCROLL</h1>
-            <h1 className='font-extrabold text-[1vw]'>TO EXPLORE</h1>
+            <h1 className='grechen-fuemen-regular text-[1vw]'>SCROLL</h1>
+            <h1 className='grechen-fuemen-regular text-[1vw]'>TO EXPLORE</h1>
           </div>
         </div>
 
@@ -100,11 +102,11 @@ const Page1 = () => {
           onMouseLeave={handleMouseLeave}
         >
           {/* Text */}
-          <h1 className="italic text-[1.4vw] font-extralight text-white">View in 3D</h1>
+          <h1 className="grechen-fuemen-regular text-[1.4vw] font-extralight text-white">View in 3D</h1>
           {/* Arrow */}
           {/* <div className="text-[1.5vw]">
-          <BsArrowUpRight />
-        </div> */}
+  <BsArrowUpRight />
+</div> */}
 
           {/* Underline */}
           <div

@@ -44,8 +44,8 @@ const Sidebar = ({ isVisible, onClose }) => {
                             onClose();
                         }}
                     >
-                        <h1 className='text-[3.5vw] font-semibold'>{nav.name}</h1>
-                        <h1 className='text-3xl mt-2'>{nav.id}</h1>
+                        <h1 className='exo-2-bold text-[3.5vw] font-semibold'>{nav.name}</h1>
+                        <h1 className='grechen-fuemen-regular text-3xl mt-2'>{nav.id}</h1>
                     </div>
                 ))}
             </div>

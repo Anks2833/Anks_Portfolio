@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <div className="w-full h-[6vw] flex justify-between items-center px-16 text-white">
       {/* Logo */}
-      <h1 className="text-[2.6vw] font-extrabold italic">AD</h1>
+      <h1 className="grechen-fuemen-regular text-[2.6vw] font-extrabold italic">AD</h1>
 
       {/* Connect with me */}
       <div
@@ -55,7 +55,7 @@ const Navbar = () => {
         }}
       >
         {/* Text */}
-        <h1 className="italic text-[1.2vw] font-extralight">CONNECT WITH ME</h1>
+        <h1 className="grechen-fuemen-regular text-[1.2vw] font-extralight">CONNECT WITH ME</h1>
         {/* Arrow */}
         <div className="text-[1.5vw]">
           <BsArrowUpRight />

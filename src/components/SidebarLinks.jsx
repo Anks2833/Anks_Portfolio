@@ -23,7 +23,7 @@ const SidebarLinks = () => {
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                     >
-                        <h1 className='rotate-90 text-lg'>{item.name}</h1>
+                        <h1 className='grechen-fuemen-regular rotate-90 text-lg'>{item.name}</h1>
                         <div>{item.icon}</div>
                     </NavLink>
                 )

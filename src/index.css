@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Great+Vibes&family=Grechen+Fuemen&family=Lilita+One&family=Sigmar&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 
 html, body {
@@ -97,4 +99,36 @@ html, body {
       1px -1px 0 black,
       -1px 1px 0 black,
       1px 1px 0 black;
+}
+
+/* fonts */
+.great-vibes-regular {
+  font-family: "Great Vibes", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sigmar-regular {
+  font-family: "Sigmar", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.grechen-fuemen-regular {
+  font-family: "Grechen Fuemen", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lilita-one-regular {
+  font-family: "Lilita One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.exo-2-bold {
+  font-family: "Exo 2", serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
 }

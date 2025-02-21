@@ -3,18 +3,18 @@ import { motion } from "framer-motion";
 const AnimatedMarquee = () => {
 
     const iconName = [
-        <h1 className="icon-name font-semibold" key="html">HTML</h1>,
-        <h1 className="icon-name font-semibold" key="css">CSS</h1>,
-        <h1 className="icon-name font-semibold" key="scss">SCSS</h1>,
-        <h1 className="icon-name font-semibold" key="js">JAVASCRIPT</h1>,
-        <h1 className="icon-name font-semibold" key="ts">TYPESCRIPT</h1>,
-        <h1 className="icon-name font-semibold" key="react">REACT.js</h1>,
-        <h1 className="icon-name font-semibold" key="next">NEXT.js</h1>,
-        <h1 className="icon-name font-semibold" key="threejs">Three.js</h1>,
-        <h1 className="icon-name font-semibold" key="node">Node.js</h1>,
-        <h1 className="icon-name font-semibold" key="mongodb">MONGODB</h1>,
-        <h1 className="icon-name font-semibold" key="unity">UNITY</h1>,
-        <h1 className="icon-name font-semibold" key="blender">BLENDER</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold italic" key="html">HTML</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold" key="css">CSS</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold italic" key="scss">SCSS</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold" key="js">JAVASCRIPT</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold italic" key="ts">TYPESCRIPT</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold" key="react">REACT.js</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold italic" key="next">NEXT.js</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold" key="threejs">Three.js</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold italic" key="node">Node.js</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold" key="mongodb">MONGODB</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold italic" key="unity">UNITY</h1>,
+        <h1 className="exo-2-bold icon-name font-semibold" key="blender">BLENDER</h1>,
     ];
 
     return (
