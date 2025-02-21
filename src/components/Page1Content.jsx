@@ -58,7 +58,7 @@ const Page1Content = () => {
     };
 
     return (
-        <div className='w-full text-white flex justify-center'>
+        <div className='w-full h-screen bg-[#0b0d0c] text-white flex justify-center'>
             <div
                 ref={contentRef}
                 className='w-full h-[100vh] flex flex-col justify-start items-center ml-12'

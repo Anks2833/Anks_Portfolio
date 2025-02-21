@@ -10,6 +10,7 @@ import Page3 from './pages/Page3';
 import Page4 from './pages/Page4';
 import Page5 from './pages/Page5';
 import PreLoader from './components/PreLoader';
+import Page6 from './pages/Page6';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -123,7 +124,7 @@ const App = () => {
   }
 
   return (
-    <div className='w-full min-h-screen bg-[#0B0D0C]'>
+    <div className='absolute z-0 w-full min-h-screen bg-[#0B0D0C]'>
       <motion.div
         className="scroll-progress"
         style={{
@@ -142,6 +143,7 @@ const App = () => {
       <Page3 />
       <Page4 />
       <Page5 />
+      <Page6 />
       <SidebarTrigger onClick={toggleSidebar} isVisible={isSidebarVisible} />
 
       {/* The small cursor */}

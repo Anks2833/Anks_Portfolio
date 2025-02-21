@@ -1,0 +1,36 @@
+import React from 'react'
+import { GoArrowUpRight } from "react-icons/go";
+import { handleMouseEnterBig, handleMouseLeave } from '../../utils/CursorEffects';
+import { NavLink } from "react-router-dom";
+import cardData from "./ProjectsData"
+
+const Project1 = () => {
+  return (
+    <>
+      <div
+        key={cardData[0].id}
+        className='relative w-[23vw] h-[32vw] overflow-hidden group'
+        onMouseEnter={handleMouseEnterBig}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* <h1 className='text-white mb-6 text-2xl font-semibold'>{cardData[0].title}</h1> */}
+
+        <img src={cardData[0].image} alt={cardData[0].title} className="w-full h-full object-cover object-top" />
+
+        {/* Content container that will show on hover */}
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-transparent group-hover:bg-[#BFFF00] transition-all duration-300">
+          <div className="absolute inset-0 flex flex-col justify-center items-start text-left opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <NavLink to={`${cardData[0].link}`} target="_blank" className="absolute -top-5 -right-4 w-28 h-28 border-2 border-black rounded-full hover:bg-white transition-all flex items-center justify-center">
+              <GoArrowUpRight className="text-black text-5xl" />
+            </NavLink>
+            <h1 className="font-bold text-2xl text-black mt-14 px-10">{cardData[0].title}</h1>
+            <p className="text-black mt-6 leading-8 font-light px-10">{cardData[0].description}</p>
+          </div>
+        </div>
+
+      </div>
+    </>
+  )
+}
+
+export default Project1
