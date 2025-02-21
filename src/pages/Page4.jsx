@@ -44,7 +44,7 @@ const Page4 = () => {
         <div id="projects" className="w-full min-h-screen bg-[#0B0D0C] text-white flex flex-col gap-16 pt-[30vw] pb-10 border-b border-b-zinc-800">
             <div className="w-full flex flex-col items-end px-28 leading-none pb-10">
                 <h1 className="text-[10vw] tracking-widest">PROJECTS</h1>
-                <h1 className="text-[7vw] tracking-widest mr-2">BY ME</h1>
+                <h1 className="text-[7vw] tracking-widest mr-2 italic">BY ME</h1>
             </div>
 
             <div ref={parentRef} className="w-full px-32 flex justify-center gap-10">

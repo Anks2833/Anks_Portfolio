@@ -3,6 +3,7 @@ import { GoArrowUpRight } from "react-icons/go";
 import { handleMouseEnterBig, handleMouseLeave } from '../../utils/CursorEffects';
 import { NavLink } from "react-router-dom";
 import cardData from "./ProjectsData"
+import "./styles/ProjStyles.css"
 
 const Project1 = () => {
   return (
@@ -15,7 +16,9 @@ const Project1 = () => {
       >
         {/* <h1 className='text-white mb-6 text-2xl font-semibold'>{cardData[0].title}</h1> */}
 
-        <img src={cardData[0].image} alt={cardData[0].title} className="w-full h-full object-cover object-top" />
+        <div className='image-1 w-full h-full bg-white p-6'>
+          <img src={cardData[0].image} alt={cardData[0].title} className="w-full h-full object-contain object-center" />
+        </div>
 
         {/* Content container that will show on hover */}
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-transparent group-hover:bg-[#BFFF00] transition-all duration-300">

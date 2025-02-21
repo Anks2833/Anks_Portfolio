@@ -3,6 +3,7 @@ import { GoArrowUpRight } from "react-icons/go";
 import { handleMouseEnterBig, handleMouseLeave } from '../../utils/CursorEffects';
 import { NavLink } from "react-router-dom";
 import cardData from "./ProjectsData"
+import "./styles/ProjStyles.css"
 
 const Project2 = () => {
   return (
@@ -13,7 +14,9 @@ const Project2 = () => {
         onMouseEnter={handleMouseEnterBig}
         onMouseLeave={handleMouseLeave}
       >
-        <img src={cardData[1].image} alt={cardData[1].title} className="w-full h-full object-cover object-top" />
+        <div className='image-2 w-full h-full bg-white p-6'>
+          <img src={cardData[1].image} alt={cardData[1].title} className="w-full h-full object-contain object-center" />
+        </div>
 
         {/* Content container that will show on hover */}
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-transparent group-hover:bg-[#BFFF00] transition-all duration-300">
