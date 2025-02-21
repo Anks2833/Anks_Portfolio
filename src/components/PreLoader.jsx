@@ -48,7 +48,7 @@ const PreLoader = () => {
 
                     <div className='flex items-center gap-2'>
                         <FaHome className='text-xl' />
-                        <h1 className='text-xl'>Home</h1>
+                        <h1 className='sigmar-regular text-2xl'>Home</h1>
                     </div>
 
                     <div className='flex items-center gap-5'>
@@ -65,17 +65,17 @@ const PreLoader = () => {
                     transition={{ duration: 400 }}
                     className='flex items-center text-black gap-12 mb-6 mt-6'
                 >
-                    <h1 className='text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular text-[8vw] text-[#000] font-semibold'>Initializing</h1>
                 </motion.div>
 
                 <div className="w-[30vw] h-6 bg-white border border-black mt-16">
                     <div ref={progressBarRef} className="h-full bg-[#000]"></div>
                 </div>
-                <p className="text-black text-5xl mt-4 font-bold">{progress}%</p>
+                <p className="grechen-fuemen-regular text-black text-5xl mt-4 font-bold">{progress}%</p>
             </div>
         </div>
     );
