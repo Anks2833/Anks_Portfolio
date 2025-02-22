@@ -3,12 +3,44 @@
     .sidebar-trigger {
         top: 40vh;
     }
+
+    .nav-container {
+        padding: 25px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .connect-text {
+        font-size: 8px;
+    }
+
+    .connect-icon {
+        font-size: 8px;
+    }
 }
   
   /* Mobile Medium Devices (375px and up) */
   @media (min-width: 321px) and (max-width: 375px) {
     .sidebar-trigger {
         top: 40vh;
+    }
+
+    .nav-container {
+        padding: 25px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .connect-text {
+        font-size: 8px;
+    }
+
+    .connect-icon {
+        font-size: 8px;
     }
 }
   
@@ -17,6 +49,22 @@
     .sidebar-trigger {
         top: 40vh;
     }
+
+    .nav-container {
+        padding: 25px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .connect-text {
+        font-size: 8px;
+    }
+
+    .connect-icon {
+        font-size: 8px;
+    }
 }
   
   /* Tablets (768px and up) */
@@ -24,11 +72,32 @@
     .sidebar-trigger {
         top: 40vh;
     }
+
+    .nav-container {
+        padding: 40px;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+
+    .connect-text {
+        font-size: 10px;
+    }
+
+    .connect-icon {
+        font-size: 10px;
+    }
 }
   
   /* Small Laptops (1024px and up) */
   @media (min-width: 769px) and (max-width: 1024px) {
     .sidebar-trigger {
         top: 40vh;
+    }
+
+    .nav-container {
+        padding-left: 40px;
+        padding-right: 40px;
     }
 }
