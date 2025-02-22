@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
+import "../styles/Preloader.css"
 
 import { FaHome } from "react-icons/fa";
 import { LuMinus } from "react-icons/lu";
@@ -41,41 +42,48 @@ const PreLoader = () => {
     if (!loading) return null;
 
     return (
-        <div ref={preloaderRef} className="fixed w-full h-screen inset-0 flex flex-col items-center justify-center bg-lime-400 z-50">
+        // The main container
+        <div ref={preloaderRef} className="main-container fixed w-full h-screen inset-0 flex flex-col items-center justify-center bg-lime-400 z-50">
+            {/* The preloader box container */}
             <div className='preloader-box w-[50vw] h-[70vh] bg-white flex flex-col items-center justify-start pt-10 overflow-hidden'>
 
-                <div className='w-full flex justify-between items-center px-10 border-b border-b-black pb-6'>
-
-                    <div className='flex items-center gap-2'>
-                        <FaHome className='text-xl' />
-                        <h1 className='sigmar-regular text-2xl'>Home</h1>
+                {/* The header of the preloader box */}
+                <div className='box-header w-full flex justify-between items-center px-10 border-b border-b-black pb-6'>
+                    {/* The hesder text */}
+                    <div className='box-header-text flex items-center gap-2'>
+                        <FaHome className='icon text-xl' />
+                        <h1 className='exo-2-bold text text-2xl'>Home</h1>
                     </div>
 
-                    <div className='flex items-center gap-5'>
-                        <LuMinus className='text-2xl' />
-                        <VscChromeMaximize className='text-2xl' />
-                        <AiOutlineClose className='text-2xl' />
+                    {/* The hesder icons */}
+                    <div className='box-header-text-icons flex items-center gap-5'>
+                        <LuMinus className='icon text-2xl' />
+                        <VscChromeMaximize className='icon text-2xl' />
+                        <AiOutlineClose className='icon text-2xl' />
                     </div>
 
                 </div>
 
+                {/* The animated marquee saying "Initializing" */}
                 <motion.div
                     initial={{ x: '20%' }}
                     animate={{ x: "-100%" }}
                     transition={{ duration: 400 }}
                     className='flex items-center text-black gap-12 mb-6 mt-6'
                 >
-                    <h1 className='lilita-one-regular text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='lilita-one-regular stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='lilita-one-regular text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='lilita-one-regular stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
-                    <h1 className='lilita-one-regular text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular init-marquee text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular init-marquee stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular init-marquee text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular init-marquee stroke-text text-[8vw] text-[#000] font-semibold'>Initializing</h1>
+                    <h1 className='lilita-one-regular init-marquee text-[8vw] text-[#000] font-semibold'>Initializing</h1>
                 </motion.div>
-
-                <div className="w-[30vw] h-6 bg-white border border-black mt-16">
+                
+                {/* The progress bar */}
+                <div className="preloader-progress w-[30vw] h-6 bg-white border border-black mt-16">
                     <div ref={progressBarRef} className="h-full bg-[#000]"></div>
                 </div>
-                <p className="grechen-fuemen-regular text-black text-5xl mt-4 font-bold">{progress}%</p>
+                {/* The progress percentage */}
+                <p className="grechen-fuemen-regular preloader-progress-percentage text-black text-5xl mt-4 font-bold">{progress}%</p>
             </div>
         </div>
     );

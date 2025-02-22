@@ -5,8 +5,8 @@ const GooeyEffect = () => {
   // Define different animation variants for each circle.
   const variant1 = {
     animate: {
-      x: [0, 10, 0, -10, 0],
-      y: [0, -10, 0, 10, 0],
+      x: [0, 20, 0, -10, 0],
+      y: [0, -20, 0, 10, 0],
       transition: {
         duration: 3,
         ease: "easeInOut",
@@ -17,8 +17,8 @@ const GooeyEffect = () => {
 
   const variant2 = {
     animate: {
-      x: [0, -15, 0, 15, 0],
-      y: [0, 5, 0, -5, 0],
+      x: [0, -35, 0, 15, 0],
+      y: [0, 30, 0, -15, 0],
       transition: {
         duration: 4,
         ease: "easeInOut",
@@ -29,8 +29,8 @@ const GooeyEffect = () => {
 
   const variant3 = {
     animate: {
-      x: [0, 5, 0, -5, 0],
-      y: [0, 10, 0, -10, 0],
+      x: [0, 25, 0, -5, 0],
+      y: [0, 30, 0, -10, 0],
       transition: {
         duration: 5,
         ease: "easeInOut",
@@ -41,8 +41,8 @@ const GooeyEffect = () => {
 
   const variant4 = {
     animate: {
-      x: [0, -10, 0, 10, 0],
-      y: [0, -15, 0, 15, 0],
+      x: [0, -30, 0, 10, 0],
+      y: [0, -25, 0, 15, 0],
       transition: {
         duration: 6,
         ease: "easeInOut",
