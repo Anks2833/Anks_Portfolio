@@ -26,9 +26,12 @@
         display: none;
     }
 
+    .tech-marquee {
+        bottom: 0;
+    }
+
     .marquee-container {
         gap: 1px;
-        height: 25vh;
     }
 
     .marquee-text {
@@ -36,11 +39,15 @@
     }
 
     .left-blur {
-        display: none;
+        height: 70vh;
+        top: -15vw;
+        left: -32vw;
     }
 
     .right-blur {
-        display: none;
+        height: 70vh;
+        top: -15vw;
+        left: 82vw;
     }
 }
   
@@ -63,7 +70,7 @@
     }
 
     .desc-content-1 {
-        font-size: 3vw;
+        font-size: 5vw;
         line-height: 20px;
         margin-top: 20px;
     }
@@ -74,7 +81,10 @@
 
     .marquee-container {
         gap: 1px;
-        height: 220px;
+    }
+
+    .tech-marquee {
+        bottom: 0;
     }
 
     .marquee-text {
@@ -120,7 +130,10 @@
 
     .marquee-container {
         gap: 1px;
-        height: 25vh;
+    }
+
+    .tech-marquee {
+        bottom: 0;
     }
 
     .marquee-text {
@@ -166,7 +179,10 @@
 
     .marquee-container {
         gap: 1px;
-        height: 60vh;
+    }
+
+    .tech-marquee {
+        bottom: 0;
     }
 
     .marquee-text {
@@ -175,7 +191,7 @@
 }
   
   /* Small Laptops (1024px and up) */
-  @media (min-width: 770px) and (max-width: 1024px) {
+  @media (min-width: 770px) and (max-width: 1025px) {
 
     .desc-content-1 {
         font-size: 5vw;
@@ -189,7 +205,10 @@
 
     .marquee-container {
         gap: 1px;
-        height: 280px;
+    }
+
+    .tech-marquee {
+        bottom: -35vw;
     }
 
     .marquee-text {

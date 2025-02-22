@@ -18,7 +18,7 @@ const Page2 = () => {
                     <p className="grechen-fuemen-regular"> and enjoys creating things that live on the internet.</p>
                     <p className="exo-2-bold desc-content-1 tracking-normal mt-24">Well-versed in numerous technologies including:</p>
                     {/* Tech marquee */}
-                    <div className="absolute left-0 -bottom-[20vw] z-[20]">
+                    <div className="tech-marquee absolute left-0 -bottom-[20vw] z-[20]">
                         <AnimatedMarquee />
                     </div>
                 </div>
