@@ -92,11 +92,15 @@
     }
 
     .left-blur {
-        height: 60vw;
+        height: 70vh;
+        top: -15vw;
+        left: -32vw;
     }
 
     .right-blur {
-        height: 60vw;
+        height: 70vh;
+        top: -15vw;
+        left: 82vw;
     }
 }
   
@@ -141,11 +145,15 @@
     }
 
     .left-blur {
-        display: none;
+        height: 70vh;
+        top: -15vw;
+        left: -32vw;
     }
 
     .right-blur {
-        display: none;
+        height: 70vh;
+        top: -15vw;
+        left: 82vw;
     }
 }
   
@@ -187,6 +195,18 @@
 
     .marquee-text {
         font-size: 80px;
+    }
+
+    .left-blur {
+        height: 70vh;
+        top: -6vw;
+        left: -12vw;
+    }
+
+    .right-blur {
+        height: 70vh;
+        top: -6vw;
+        left: 90vw;
     }
 }
   
