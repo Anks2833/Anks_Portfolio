@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import "../styles/Page2.css"
 
 const AnimatedMarquee = () => {
 
@@ -18,18 +19,19 @@ const AnimatedMarquee = () => {
     ];
 
     return (
-        <div className="relative h-[40vw] whitespace-nowrap flex flex-col gap-5">
+        // The marquee container
+        <div className="marquee-container relative h-[40vw] whitespace-nowrap flex flex-col gap-5">
 
             {/* right div */}
-            <div className="absolute -left-[3vw] -bottom-12 z-[2] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
+            <div className="right-blur absolute -left-[3vw] -bottom-12 z-[2] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
 
             {/* left div */}
-            <div className="absolute left-[93vw] -bottom-12 z-[3] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
+            <div className="left-blur absolute left-[93vw] -bottom-12 z-[3] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
 
             {/* Right to Left Marquee */}
             <div className="flex items-center gap-5">
                 <motion.div
-                    className="w-[100vw] flex gap-10 text-9xl"
+                    className="marquee-text w-[100vw] flex gap-10 text-9xl"
                     initial={{ x: "100%" }} // Start from the right
                     animate={{ x: ["0%", "-100%"] }} // Move from right to left
                     transition={{
@@ -47,7 +49,7 @@ const AnimatedMarquee = () => {
             {/* Left to Right Marquee */}
             <div className="flex items-center gap-5">
                 <motion.div
-                    className="w-[100vw] flex gap-10 text-8xl mt-4"
+                    className="marquee-text w-[100vw] flex gap-10 text-8xl mt-4"
                     initial={{ x: "-100%" }} // Start from the left
                     animate={{ x: ["-100%", "0%"] }} // Move from left to right
                     transition={{
@@ -65,7 +67,7 @@ const AnimatedMarquee = () => {
             {/* Right to Left Marquee */}
             <div className="flex items-center gap-5">
                 <motion.div
-                    className="w-[100vw] flex gap-10 text-8xl"
+                    className="marquee-text w-[100vw] flex gap-10 text-8xl"
                     initial={{ x: "100%" }} // Start from the right
                     animate={{ x: ["0%", "-100%"] }} // Move from right to left
                     transition={{
@@ -83,7 +85,7 @@ const AnimatedMarquee = () => {
             {/* Left to Right Marquee */}
             <div className="flex items-center gap-5">
                 <motion.div
-                    className="w-[100vw] flex gap-10 text-9xl mt-4"
+                    className="marquee-text w-[100vw] flex gap-10 text-9xl mt-4"
                     initial={{ x: "-100%" }} // Start from the left
                     animate={{ x: ["-100%", "0%"] }} // Move from left to right
                     transition={{
