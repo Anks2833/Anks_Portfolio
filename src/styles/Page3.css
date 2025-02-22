@@ -1,0 +1,110 @@
+/* Mobile Small Devices (320px and up) */
+@media (min-width: 300px) and (max-width: 321px) {
+
+    #achievements {
+        padding-left: 40px;
+        padding-right: 0;
+        padding-top: 250px;
+        gap: 20px;
+    }
+
+    .page-3-heading {
+        font-size: 20px;
+    }
+
+    .achievements {
+        font-size: 20px;
+        line-height: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-right: 40px;
+    }
+}
+  
+  /* Mobile Medium Devices (375px and up) */
+  @media (min-width: 322px) and (max-width: 376px) {
+    #achievements {
+        padding-left: 40px;
+        padding-right: 0;
+        padding-top: 250px;
+        gap: 20px;
+    }
+
+    .page-3-heading {
+        font-size: 20px;
+    }
+
+    .achievements {
+        font-size: 20px;
+        line-height: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-right: 40px;
+    }
+}
+  
+  /* Mobile Large Devices (425px and up) */
+  @media (min-width: 377px) and (max-width: 426px) {
+    #achievements {
+        padding-left: 40px;
+        padding-right: 0;
+        padding-top: 250px;
+        gap: 20px;
+    }
+
+    .page-3-heading {
+        font-size: 20px;
+    }
+
+    .achievements {
+        font-size: 20px;
+        line-height: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-right: 40px;
+    }
+}
+  
+  /* Tablets (768px and up) */
+  @media (min-width: 427px) and (max-width: 769px) {
+    #achievements {
+        padding-left: 40px;
+        padding-right: 0;
+        padding-top: 250px;
+        gap: 50px;
+    }
+
+    .page-3-heading {
+        font-size: 50px;
+    }
+
+    .achievements {
+        font-size: 20px;
+        line-height: 20px;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        margin-right: 40px;
+    }
+}
+  
+  /* Small Laptops (1024px and up) */
+  @media (min-width: 770px) and (max-width: 1025px) {
+    #achievements {
+        padding-left: 40px;
+        padding-right: 0;
+        padding-top: 100px;
+        gap: 50px;
+    }
+
+    .page-3-heading {
+        font-size: 60px;
+    }
+
+    .achievements {
+        font-size: 20px;
+        line-height: 20px;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        margin-right: 40px;
+    }
+}

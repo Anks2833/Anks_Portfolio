@@ -1,4 +1,5 @@
 import { handleMouseEnterBig, handleMouseLeave } from '../utils/CursorEffects';
+import "../styles/Page3.css"
 
 const Achievements = () => {
 

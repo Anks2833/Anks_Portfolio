@@ -26,7 +26,7 @@ const AnimatedMarquee = () => {
             <div className="right-blur absolute -left-[3vw] -bottom-12 z-[2] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
 
             {/* left div */}
-            <div className="left-blur absolute left-[93vw] -bottom-12 z-[3] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
+            <div className="left-blur absolute left-[93vw] -bottom-40 z-[3] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
 
             {/* Right to Left Marquee */}
             <div className="flex items-center gap-5">
