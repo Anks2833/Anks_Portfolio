@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import "../styles/Page1.css"
 
 const Page1Content = () => {
     const contentRef = useRef(null);

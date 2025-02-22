@@ -1,6 +1,7 @@
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { BsArrowUpRight } from "react-icons/bs";
-import { useRef } from "react";
+import "../styles/Page1.css"
 
 const Navbar = () => {
   const underlineRef = useRef(null); // Ref for the underline

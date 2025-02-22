@@ -7,6 +7,8 @@ import Page1Content from '../components/Page1Content';
 import SidebarTrigger from '../components/SidebarTrigger';
 import { NavLink } from 'react-router-dom';
 
+import "../styles/Page1.css"
+
 const Page1 = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
