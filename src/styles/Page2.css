@@ -213,13 +213,29 @@
   /* Small Laptops (1024px and up) */
   @media (min-width: 770px) and (max-width: 1025px) {
 
+    .desc-heading {
+        padding-left: 35px;
+        font-size: 30px;
+    }
+
+    .desc-content {
+        padding-left: 35px;
+        font-size: 30px;
+    }
+
+    .page-2-container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
     .desc-content-1 {
         font-size: 5vw;
         line-height: 40px;
         margin-top: 20px;
     }
 
-    .photo {
+    .photo-container {
         display: none;
     }
 
@@ -228,10 +244,22 @@
     }
 
     .tech-marquee {
-        bottom: -35vw;
+        bottom: -10vw;
     }
 
     .marquee-text {
         font-size: 80px;
+    }
+
+    .left-blur {
+        height: 70vh;
+        top: -3vw;
+        left: -8vw;
+    }
+
+    .right-blur {
+        height: 70vh;
+        top: -6vw;
+        left: 91vw;
     }
 }
