@@ -19,6 +19,21 @@
     .connect-icon {
         font-size: 8px;
     }
+
+    .page-1-bottom {
+        bottom: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .view-in-3d {
+        font-size: 13px;
+        padding-bottom: 20px;
+    }
+
+    .scroll-text {
+        font-size: 10px;
+    }
 }
   
   /* Mobile Medium Devices (375px and up) */
@@ -41,6 +56,21 @@
 
     .connect-icon {
         font-size: 8px;
+    }
+
+    .page-1-bottom {
+        bottom: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .view-in-3d {
+        font-size: 20px;
+        padding-bottom: 20px;
+    }
+
+    .scroll-text {
+        font-size: 12px;
     }
 }
   
@@ -65,6 +95,21 @@
     .connect-icon {
         font-size: 8px;
     }
+
+    .page-1-bottom {
+        bottom: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .view-in-3d {
+        font-size: 20px;
+        padding-bottom: 20px;
+    }
+
+    .scroll-text {
+        font-size: 12px;
+    }
 }
   
   /* Tablets (768px and up) */
@@ -75,18 +120,34 @@
 
     .nav-container {
         padding: 40px;
+        padding-top: 45px;
     }
 
     .logo {
-        font-size: 30px;
+        font-size: 40px;
     }
 
     .connect-text {
-        font-size: 10px;
+        font-size: 15px;
     }
 
     .connect-icon {
-        font-size: 10px;
+        font-size: 15px;
+    }
+
+    .page-1-bottom {
+        bottom: 70px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .view-in-3d {
+        font-size: 20px;
+        padding-bottom: 20px;
+    }
+
+    .scroll-text {
+        font-size: 12px;
     }
 }
   

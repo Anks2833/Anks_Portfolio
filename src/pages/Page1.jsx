@@ -76,7 +76,7 @@ const Page1 = () => {
       {/* <h1 className='text-white'>hey</h1> */}
 
       {/* The bottom content */}
-      <div className='absolute bottom-28 w-full flex justify-between px-10 pr-20 text-white'>
+      <div className='page-1-bottom absolute bottom-28 w-full flex justify-between px-10 pr-20 text-white'>
 
         {/* Scroll to explore div */}
         <div className={`flex items-start gap-2 ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}>
@@ -91,20 +91,20 @@ const Page1 = () => {
           />
 
           <div className='flex flex-col text-white leading-none'>
-            <h1 className='grechen-fuemen-regular text-[1vw]'>SCROLL</h1>
-            <h1 className='grechen-fuemen-regular text-[1vw]'>TO EXPLORE</h1>
+            <h1 className='grechen-fuemen-regular scroll-text text-[1vw]'>SCROLL</h1>
+            <h1 className='grechen-fuemen-regular scroll-text text-[1vw]'>TO EXPLORE</h1>
           </div>
         </div>
 
+        {/* View in 3d Text */}
         <NavLink
           to="https://anks-portfolio.vercel.app"
           target='_blank'
-          className={`relative w-fit flex gap-2 items-center cursor-pointer overflow-hidden ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}
+          className={`view-in-3d relative w-fit flex gap-2 items-center cursor-pointer overflow-hidden ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Text */}
-          <h1 className="grechen-fuemen-regular text-[1.4vw] font-extralight text-white">View in 3D</h1>
+          <h1 className="grechen-fuemen-regular view-in-3d text-[1.4vw] font-extralight text-white">View in 3D</h1>
           {/* Arrow */}
           {/* <div className="text-[1.5vw]">
   <BsArrowUpRight />

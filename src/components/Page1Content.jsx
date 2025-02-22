@@ -59,46 +59,105 @@ const Page1Content = () => {
     };
 
     return (
-        <div className='w-full h-screen text-white flex justify-center'>
-            <div
-                ref={contentRef}
-                className='w-full h-[100vh] flex flex-col justify-start items-center ml-12'
-                style={{
-                    perspective: '1000px',
-                    transformStyle: 'preserve-3d',
-                    position: 'relative',
-                }}
-            >
-                <p 
-                    className='text-[5vw] text-center font-light tracking-wider'
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+        <>
+
+            {/* Content Container */}
+            <div className='content-container w-full h-screen hidden sm:hidden md:flex lg:flex text-white justify-center'>
+                <div
+                    ref={contentRef}
+                    className='w-full md:h-[70vh] lg:h-[100vh] flex flex-col  md:justify-center lg:justify-start items-center ml-12'
+                    style={{
+                        perspective: '1000px',
+                        transformStyle: 'preserve-3d',
+                        position: 'relative',
+                    }}
                 >
-                    <span className='italic'>"Hello, I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
-                </p>
-                <p 
-                    className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    FULLSTACK WEB DEVELOPER
-                </p>
-                <p 
-                    className='text-[5vw] text-center font-light italic tracking-wider'
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    based in India, I'm also specialized in
-                </p>
-                <p 
-                    className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    GAME DEVELOPMENT<span className='font-light italic text-black'>"</span>
-                </p>
+                    {/* Para1 */}
+                    <p
+                        className='text-[5vw] text-center font-light tracking-wider'
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <span className='italic'>"Hello, I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
+                    </p>
+
+                    {/* Para2 */}
+                    <p
+                        className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        FULLSTACK WEB DEVELOPER
+                    </p>
+
+                    {/* Para3 */}
+                    <p
+                        className='text-[5vw] text-center font-light italic tracking-wider'
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        based in India, I'm also specialized in
+                    </p>
+
+                    {/* Para4 */}
+                    <p
+                        className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        GAME DEVELOPMENT<span className='font-light italic text-black'>"</span>
+                    </p>
+                </div>
             </div>
-        </div>
+
+            {/* Content Container Mobile */}
+            <div className='w-full h-screen flex sm:flex md:hidden lg:hidden text-white justify-center'>
+                <div
+                    ref={contentRef}
+                    className='w-full h-[80vh] flex flex-col justify-center items-start ml-8'>
+                    {/* Para1 */}
+                    <p className='text-5xl text-center font-light tracking-wider'>
+                        <span className='italic text-6xl'>"Hello,</span>
+                    </p>
+
+                    {/* Para2 */}
+                    <p className='text-5xl'>
+                        <span>I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
+                    </p>
+
+                    {/* Para2 */}
+                    <p className='text-5xl text-center font-bold w-fit tracking-wider'>
+                        FULLSTACK
+                    </p>
+
+                    <p className='text-5xl font-bold'>
+                        WEB
+                    </p>
+
+                    <p className='text-5xl font-bold'>
+                        DEVELOPER
+                    </p>
+
+                    {/* Para3 */}
+                    <p className='text-5xl text-left font-light italic tracking-wider'>
+                        based in India,
+                    </p>
+
+                    <p className='text-5xl'>
+                        I'm also specialized in
+                    </p>
+
+                    {/* Para4 */}
+                    <p className='text-5xl text-left font-bold w-fit tracking-wider'>
+                        GAME
+                    </p>
+
+                    <p className='text-4xl font-bold'>
+                        DEVELOPMENT"
+                    </p>
+                </div>
+            </div >
+        </>
     );
 }
 
