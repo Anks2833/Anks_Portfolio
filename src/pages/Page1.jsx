@@ -10,20 +10,46 @@ import { NavLink } from 'react-router-dom';
 import "../styles/Page1.css"
 
 const Page1 = () => {
-
   const [isScrolled, setIsScrolled] = useState(false);
+  const pageRef = useRef(null);
+
+  // Force a height calculation after initial render
+  useEffect(() => {
+    // Force a layout recalculation
+    const forceReflow = () => {
+      if (pageRef.current) {
+        // This forces a reflow by reading a layout property
+        const height = pageRef.current.getBoundingClientRect().height;
+        console.log("Initial page height:", height);
+        
+        // Force a minimum height to ensure scrollability if needed
+        if (height <= window.innerHeight) {
+          pageRef.current.style.minHeight = `${window.innerHeight + 100}px`;
+        }
+      }
+    };
+
+    // Run initially and after a short delay to ensure all content is rendered
+    forceReflow();
+    const timer = setTimeout(forceReflow, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true);
-        console.log("Scrolled down")
+        console.log("Scrolled down");
       } else {
         setIsScrolled(false);
-        console.log("Scrolled up")
+        console.log("Scrolled up");
       }
     };
 
+    // Initial check
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -69,20 +95,21 @@ const Page1 = () => {
   };
 
   return (
-    <div id='home' className='relative w-full min-h-screen bg-[#0b0d0c]'>
+    <div 
+      id='home' 
+      ref={pageRef}
+      className='relative w-full min-h-[110vh] bg-[#0b0d0c]'
+    >
       <Navbar />
       <Page1Content />
 
-      {/* <h1 className='text-white'>hey</h1> */}
-
       {/* The bottom content */}
       <div className='page-1-bottom absolute bottom-28 w-full flex justify-between px-10 pr-20 text-white'>
-
         {/* Scroll to explore div */}
-        <div className={`flex items-start gap-2 ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}>
+        <div className={`flex items-start gap-2 ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-100 transition-all"}`}>
           <motion.div
             className='bg-white w-[0.01vw] h-16 origin-top'
-            animate={{ scaleY: [0, 1, 0], opacity: 0 }}
+            animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
             transition={{
               duration: 2,
               repeat: Infinity,
@@ -100,15 +127,11 @@ const Page1 = () => {
         <NavLink
           to="https://anks-portfolio.vercel.app"
           target='_blank'
-          className={`view-in-3d relative w-fit flex gap-2 items-center cursor-pointer overflow-hidden ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-1 transition-all"}`}
+          className={`view-in-3d relative w-fit flex gap-2 items-center cursor-pointer overflow-hidden ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-100 transition-all"}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <h1 className="grechen-fuemen-regular view-in-3d text-[1.4vw] font-extralight text-white">View in 3D</h1>
-          {/* Arrow */}
-          {/* <div className="text-[1.5vw]">
-  <BsArrowUpRight />
-</div> */}
 
           {/* Underline */}
           <div

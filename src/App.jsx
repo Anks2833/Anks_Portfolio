@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
-import Lenis from '@studio-freight/lenis'; // Import Lenis
+import Lenis from '@studio-freight/lenis'; 
 import Page1 from './pages/Page1';
 import Sidebar from './components/Sidebar';
 import SidebarTrigger from './components/SidebarTrigger';
@@ -18,38 +18,59 @@ const App = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentPage, setCurrentPage] = useState('Page1');
-  const scrollProgressRef = useRef(null);
+  const lenisRef = useRef(null);
+  const appContainerRef = useRef(null);
 
+  // Preloader handling
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       setLoading(false);
+      
+      // After loading finishes, initialize Lenis with a delay to ensure DOM is ready
+      setTimeout(() => {
+        initializeLenis();
+      }, 200);
     }, 10000);
 
     return () => clearTimeout(loadingTimeout);
   }, []);
 
-  useEffect(() => {
-    // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.2, // Smooth scroll duration
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function
-      smooth: true, // Enable smooth scrolling
+  // Initialize Lenis for smooth scrolling
+  const initializeLenis = () => {
+    if (lenisRef.current) {
+      lenisRef.current.destroy();
+    }
+
+    // Initialize Lenis
+    lenisRef.current = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false, // Disable smooth scrolling on touch devices
+      touchMultiplier: 2,
     });
 
     // Update Lenis on each frame
     function raf(time) {
-      lenis.raf(time);
+      lenisRef.current.raf(time);
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
+    
+    // Force a layout recalculation
+    if (appContainerRef.current) {
+      const height = appContainerRef.current.scrollHeight;
+      console.log("Total content height:", height);
+      
+      // Manually call scrollTo(0) to reset scroll position and ensure Lenis is aware of the page
+      setTimeout(() => {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }, 100);
+    }
+  };
 
-    // Cleanup on unmount
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
+  // Cursor and scroll tracking
   useEffect(() => {
     const handleMouseMove = (event) => {
       setCursorPosition({ x: event.clientX, y: event.clientY });
@@ -65,12 +86,16 @@ const App = () => {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
 
+    // Run once to set initial scroll progress
+    handleScroll();
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  // Update cursor position with GSAP
   useEffect(() => {
     gsap.to('.custom-cursor', {
       x: cursorPosition.x,
@@ -85,6 +110,25 @@ const App = () => {
       ease: 'power2.out'
     });
   }, [cursorPosition]);
+
+  // Handle window resize - reinitialize Lenis
+  useEffect(() => {
+    const handleResize = () => {
+      // Reinitialize Lenis on resize to account for layout changes
+      if (!loading) {
+        initializeLenis();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
+    };
+  }, [loading]);
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
@@ -124,7 +168,10 @@ const App = () => {
   }
 
   return (
-    <div className='absolute z-0 w-full min-h-screen bg-[#0B0D0C]'>
+    <div 
+      ref={appContainerRef}
+      className='absolute z-0 w-full min-h-screen bg-[#0B0D0C]'
+    >
       <motion.div
         className="scroll-progress"
         style={{

@@ -1,7 +1,19 @@
-import { motion } from "framer-motion";
-import "../styles/Page2.css"
+import { useEffect, useRef } from "react";
+import { motion, useAnimationControls } from "framer-motion";
+import "../styles/Page2.css";
 
 const AnimatedMarquee = () => {
+    // References to measure content widths
+    const row1Ref = useRef(null);
+    const row2Ref = useRef(null);
+    const row3Ref = useRef(null);
+    const row4Ref = useRef(null);
+    
+    // Animation controls for each row
+    const row1Controls = useAnimationControls();
+    const row2Controls = useAnimationControls();
+    const row3Controls = useAnimationControls();
+    const row4Controls = useAnimationControls();
 
     const iconName = [
         <h1 className="exo-2-bold icon-name font-semibold italic" key="html">HTML</h1>,
@@ -18,27 +30,73 @@ const AnimatedMarquee = () => {
         <h1 className="exo-2-bold icon-name font-semibold" key="blender">BLENDER</h1>,
     ];
 
+    // Setup the seamless animations after component mounts
+    useEffect(() => {
+        // Function to create a seamless animation for a row
+        const createSeamlessAnimation = (rowRef, controls, direction, speed) => {
+            if (!rowRef.current) return;
+            
+            // Get the width of one complete set of items
+            const contentWidth = rowRef.current.offsetWidth / 3; // Divided by 3 because we have 3 sets
+            
+            // The animation is different based on direction
+            if (direction === "right-to-left") {
+                // Animate from 0 to -contentWidth (moving left)
+                const animate = async () => {
+                    await controls.start({
+                        x: -contentWidth,
+                        transition: {
+                            duration: speed,
+                            ease: "linear",
+                        }
+                    });
+                    // Instantly reset to starting position (no animation)
+                    controls.set({ x: 0 });
+                    // Repeat
+                    animate();
+                };
+                animate();
+            } else {
+                // Animate from -contentWidth to 0 (moving right)
+                const animate = async () => {
+                    await controls.start({
+                        x: 0,
+                        transition: {
+                            duration: speed,
+                            ease: "linear", 
+                        }
+                    });
+                    // Instantly reset to starting position (no animation)
+                    controls.set({ x: -contentWidth });
+                    // Repeat
+                    animate();
+                };
+                controls.set({ x: -contentWidth });
+                animate();
+            }
+        };
+        
+        // Setup animations with different speeds for variety
+        createSeamlessAnimation(row1Ref, row1Controls, "right-to-left", 30);
+        createSeamlessAnimation(row2Ref, row2Controls, "left-to-right", 25);
+        createSeamlessAnimation(row3Ref, row3Controls, "right-to-left", 35);
+        createSeamlessAnimation(row4Ref, row4Controls, "left-to-right", 28);
+        
+    }, [row1Controls, row2Controls, row3Controls, row4Controls]);
+
     return (
         // The marquee container
-        <div className="marquee-container relative h-[40vw] whitespace-nowrap flex flex-col gap-5">
-
-            {/* right div */}
+        <div className="marquee-container relative h-[40vw] whitespace-nowrap flex flex-col gap-5 overflow-hidden">
+            {/* Blur effects for the edges */}
             <div className="right-blur absolute -left-[3vw] -bottom-12 z-[2] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
-
-            {/* left div */}
             <div className="left-blur absolute left-[93vw] -bottom-40 z-[3] w-40 h-[60vw] bg-[#0B0D0C] blur-lg rounded-full"></div>
 
-            {/* Right to Left Marquee */}
-            <div className="flex items-center gap-5">
+            {/* Row 1: Right to Left */}
+            <div className="flex items-center gap-5 overflow-hidden">
                 <motion.div
-                    className="marquee-text w-[100vw] flex gap-10 text-9xl"
-                    initial={{ x: "100%" }} // Start from the right
-                    animate={{ x: ["0%", "-100%"] }} // Move from right to left
-                    transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity,
-                    }}
+                    ref={row1Ref}
+                    className="marquee-text w-[300vw] flex gap-10 text-9xl"
+                    animate={row1Controls}
                 >
                     {iconName}
                     {iconName}
@@ -46,17 +104,12 @@ const AnimatedMarquee = () => {
                 </motion.div>
             </div>
 
-            {/* Left to Right Marquee */}
-            <div className="flex items-center gap-5">
+            {/* Row 2: Left to Right */}
+            <div className="flex items-center gap-5 overflow-hidden">
                 <motion.div
-                    className="marquee-text w-[100vw] flex gap-10 text-8xl mt-4"
-                    initial={{ x: "-100%" }} // Start from the left
-                    animate={{ x: ["-100%", "0%"] }} // Move from left to right
-                    transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity,
-                    }}
+                    ref={row2Ref}
+                    className="marquee-text w-[300vw] flex gap-10 text-8xl mt-4"
+                    animate={row2Controls}
                 >
                     {iconName}
                     {iconName}
@@ -64,17 +117,12 @@ const AnimatedMarquee = () => {
                 </motion.div>
             </div>
 
-            {/* Right to Left Marquee */}
-            <div className="flex items-center gap-5">
+            {/* Row 3: Right to Left */}
+            <div className="flex items-center gap-5 overflow-hidden">
                 <motion.div
-                    className="marquee-text w-[100vw] flex gap-10 text-8xl"
-                    initial={{ x: "100%" }} // Start from the right
-                    animate={{ x: ["0%", "-100%"] }} // Move from right to left
-                    transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity,
-                    }}
+                    ref={row3Ref}
+                    className="marquee-text w-[300vw] flex gap-10 text-8xl"
+                    animate={row3Controls}
                 >
                     {iconName}
                     {iconName}
@@ -82,17 +130,12 @@ const AnimatedMarquee = () => {
                 </motion.div>
             </div>
 
-            {/* Left to Right Marquee */}
-            <div className="flex items-center gap-5">
+            {/* Row 4: Left to Right */}
+            <div className="flex items-center gap-5 overflow-hidden">
                 <motion.div
-                    className="marquee-text w-[100vw] flex gap-10 text-9xl mt-4"
-                    initial={{ x: "-100%" }} // Start from the left
-                    animate={{ x: ["-100%", "0%"] }} // Move from left to right
-                    transition={{
-                        duration: 30,
-                        ease: "linear",
-                        repeat: Infinity,
-                    }}
+                    ref={row4Ref}
+                    className="marquee-text w-[300vw] flex gap-10 text-9xl mt-4"
+                    animate={row4Controls}
                 >
                     {iconName}
                     {iconName}
