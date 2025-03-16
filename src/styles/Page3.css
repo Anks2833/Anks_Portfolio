@@ -1,336 +1,172 @@
-/* Page3.css - Enhanced with scroll animations and visual polish */
+/* Add these styles to your existing Page3.css */
 
-/* Base section styling */
-.achievements-section {
-    position: relative;
-    background-color: #0B0D0C;
-    color: white;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+/* Base styles for achievement items */
+.achievement-item {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.achievement-item::before {
+  content: attr(data-content);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-size: clamp(2rem, 8vw, 4rem);
+  z-index: -1;
+}
+
+.achievement-item:hover::before {
+  opacity: 0.03;
+}
+
+/* Animated line effect */
+.line-progress {
+  transform-origin: left;
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Text glitch effect on hover */
+@keyframes textShift {
+  0% {
+    transform: translateX(0);
   }
-  
-  /* Progress line styling */
-  .achievement-progress-container {
-    position: relative;
-    height: 100%;
+  20% {
+    transform: translateX(-2px);
   }
-  
-  .achievement-progress-line {
-    background-color: #BFFF00;
-    box-shadow: 0 0 10px rgba(191, 255, 0, 0.3);
-    will-change: height;
+  40% {
+    transform: translateX(2px);
   }
-  
-  /* Text styling */
-  .page-3-heading {
-    position: relative;
-    z-index: 1;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    line-height: 1.1;
-    will-change: transform;
+  60% {
+    transform: translateX(-1px);
   }
-  
-  /* Create noise texture background */
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.02;
-    mix-blend-mode: soft-light;
-    pointer-events: none;
+  80% {
+    transform: translateX(1px);
   }
-  
-  /* Achievement item styling */
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.achievement-item:hover .achievement-text {
+  text-shadow: 2px 2px 8px rgba(191, 255, 0, 0.2);
+}
+
+.achievement-item:active .achievement-text {
+  animation: textShift 0.3s ease forwards;
+}
+
+/* Subtle hover state for better UX */
+.achievement-item {
+  box-shadow: inset 0 0 0 0 rgba(191, 255, 0, 0);
+  transition: all 0.4s ease;
+}
+
+.achievement-item:hover {
+  box-shadow: inset 4px 0 0 0 rgba(191, 255, 0, 0.3);
+}
+
+/* Enhanced media queries for responsive design */
+/* Mobile Small Devices (320px and up) */
+@media (min-width: 300px) and (max-width: 321px) {
   .achievement-item {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    will-change: transform, background-color;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  
+  .achievement-id {
+    font-size: 24px !important;
+  }
+  
+  .achievement-text {
+    font-size: 16px !important;
+    line-height: 1.3;
+  }
+}
+
+/* Mobile Medium Devices (375px and up) */
+@media (min-width: 322px) and (max-width: 376px) {
+  .achievement-item {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  
+  .achievement-id {
+    font-size: 26px !important;
+  }
+  
+  .achievement-text {
+    font-size: 17px !important;
+    line-height: 1.3;
+  }
+}
+
+/* Mobile Large Devices (425px and up) */
+@media (min-width: 377px) and (max-width: 426px) {
+  .achievement-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .achievement-id {
+    font-size: 28px !important;
+  }
+  
+  .achievement-text {
+    font-size: 18px !important;
+    line-height: 1.3;
+  }
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 427px) and (max-width: 769px) {
+  .achievement-item {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  
+  .achievement-id {
+    font-size: 36px !important;
+  }
+  
+  .achievement-text {
+    font-size: 22px !important;
+    line-height: 1.3;
+  }
+}
+
+/* Small Laptops (1024px and up) */
+@media (min-width: 770px) and (max-width: 1025px) {
+  .achievement-item {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  
+  .achievement-id {
+    font-size: 42px !important;
+  }
+  
+  .achievement-text {
+    font-size: 26px !important;
+    line-height: 1.3;
+  }
+}
+
+/* Larger screens (1026px and up) */
+@media (min-width: 1026px) {
+  .achievement-item {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
   
   .achievement-item:hover {
-    background-color: rgba(191, 255, 0, 0.1);
-    transform: translateX(10px);
+    transform: translateX(8px);
   }
-  
-  /* Line animation */
-  .achievement-line {
-    position: relative;
-    width: 100%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: background-color 0.3s ease, height 0.3s ease;
-    will-change: width, background-color;
-  }
-  
-  .achievement-item:hover .achievement-line {
-    background-color: #BFFF00;
-    height: 3px;
-  }
-  
-  /* Achievement number styling */
-  .achievement-number {
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
-    transition: color 0.3s ease, transform 0.3s ease;
-    will-change: transform, color;
-  }
-  
-  .achievement-item:hover .achievement-number {
-    color: #BFFF00;
-    transform: scale(1.2);
-  }
-  
-  /* Achievement text styling */
-  .achievement-text {
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    will-change: color, text-shadow;
-  }
-  
-  .achievement-item:hover .achievement-text {
-    color: white;
-    text-shadow: 0 0 8px rgba(191, 255, 0, 0.3);
-  }
-  
-  /* Year and category badges */
-  .achievement-year {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 9999px;
-    padding: 4px 12px;
-    font-size: 0.875rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .achievement-item:hover .achievement-year {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .achievement-category {
-    color: #BFFF00;
-    border: 1px solid rgba(191, 255, 0, 0.3);
-    border-radius: 9999px;
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  
-  .achievement-item:hover .achievement-category {
-    background-color: rgba(191, 255, 0, 0.1);
-    border-color: rgba(191, 255, 0, 0.6);
-  }
-  
-  /* Responsive styles */
-  
-  /* Mobile Small Devices (320px and up) */
-  @media (min-width: 300px) and (max-width: 321px) {
-    .achievements-section {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    
-    .content-wrapper {
-      padding-top: 6rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    
-    .page-3-heading {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    
-    .achievement-item {
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    
-    .achievement-number {
-      font-size: 1.25rem;
-      width: auto;
-      margin-bottom: 0.5rem;
-    }
-    
-    .achievement-text {
-      font-size: 1rem;
-      line-height: 1.3;
-    }
-    
-    .achievement-year,
-    .achievement-category {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-    }
-  }
-    
-  /* Mobile Medium Devices (375px and up) */
-  @media (min-width: 322px) and (max-width: 376px) {
-    .achievements-section {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    
-    .content-wrapper {
-      padding-top: 6rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    
-    .page-3-heading {
-      font-size: 2.25rem;
-      margin-bottom: 2rem;
-    }
-    
-    .achievement-item {
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-    }
-    
-    .achievement-number {
-      font-size: 1.5rem;
-      width: auto;
-      margin-bottom: 0.5rem;
-    }
-    
-    .achievement-text {
-      font-size: 1.125rem;
-      line-height: 1.4;
-    }
-  }
-    
-  /* Mobile Large Devices (425px and up) */
-  @media (min-width: 377px) and (max-width: 426px) {
-    .achievements-section {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    
-    .content-wrapper {
-      padding-top: 6rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    
-    .page-3-heading {
-      font-size: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-    
-    .achievement-item {
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-    
-    .achievement-number {
-      font-size: 1.75rem;
-    }
-    
-    .achievement-text {
-      font-size: 1.25rem;
-      line-height: 1.4;
-    }
-  }
-    
-  /* Tablets (768px and up) */
-  @media (min-width: 427px) and (max-width: 769px) {  
-    .content-wrapper {
-      padding-top: 8rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-    
-    .page-3-heading {
-      font-size: 3.5rem;
-      margin-bottom: 3rem;
-    }
-    
-    .achievement-item {
-      padding: 1.75rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .achievement-number {
-      font-size: 2rem;
-      width: 3rem;
-    }
-    
-    .achievement-text {
-      font-size: 1.5rem;
-      line-height: 1.4;
-    }
-    
-    .achievement-progress-container {
-      margin-right: 1.5rem;
-    }
-  }
-    
-  /* Small Laptops (1024px and up) */
-  @media (min-width: 770px) and (max-width: 1025px) {
-    .content-wrapper {
-      padding-top: 10rem;
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
-    }
-    
-    .page-3-heading {
-      font-size: 4rem;
-      margin-bottom: 4rem;
-    }
-    
-    .achievement-item {
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-    
-    .achievement-number {
-      font-size: 2.25rem;
-      width: 4rem;
-    }
-    
-    .achievement-text {
-      font-size: 1.75rem;
-      line-height: 1.3;
-    }
-    
-    .achievement-progress-container {
-      margin-right: 2rem;
-    }
-  }
-  
-  /* Animation helpers */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  
-  @keyframes slideRight {
-    from { transform: translateX(-30px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  @keyframes scaleUp {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  
-  /* Accessibility */
-  @media (prefers-reduced-motion: reduce) {
-    .page-3-heading,
-    .achievement-item,
-    .achievement-line,
-    .achievement-number,
-    .achievement-text,
-    .achievement-year,
-    .achievement-category,
-    .achievement-progress-line {
-      transition: none !important;
-      animation: none !important;
-      transform: none !important;
-    }
-  }
+}
