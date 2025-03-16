@@ -13,12 +13,12 @@ const Page5 = () => {
             </div>
 
             <div className="flex flex-col items-start px-20 leading-none">
-                <h1 className="sigmar-regular text-[11.5vw] italic">LET'S CONNECT</h1>
-                <h1 className="sigmar-regular text-[11.5vw] ml-[20vw] italic">WITH MY</h1>
-                <h1 className="sigmar-regular text-[11.5vw] ml-[40vw] italic">SOCIALS</h1>
+                <h1 className="text-[12vw] font-extrabold italic">LET'S CONNECT</h1>
+                <h1 className="text-[11vw] font-extrabold ml-[20vw] italic">WITH MY</h1>
+                <h1 className="text-[11vw] font-extrabold ml-[40vw] italic">SOCIALS</h1>
             </div>
 
-            <div className="absolute left-20 bottom-28">
+            <div className="absolute left-20 bottom-32">
                 <ResumeComponent />
             </div>
 

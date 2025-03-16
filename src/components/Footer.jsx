@@ -8,7 +8,7 @@ const Footer = () => {
     return (
 
 
-        <div className="w-full h-[100vh] flex justify-between items-center text-white px-20">
+        <div className="w-full h-[100vh] flex justify-between items-end text-white px-20 pb-5">
 
             <div className="flex items-center gap-8">
                 <NavLink

@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import "../styles/Page3.css";
@@ -10,7 +11,9 @@ gsap.registerPlugin(ScrollTrigger);
 const Achievements = () => {
   const containerRef = useRef(null);
   const achievementRefs = useRef([]);
+  const timelineRef = useRef(null);
   const isInView = useInView(containerRef, { once: false, amount: 0.2 });
+  const hoverSetupDone = useRef(false);
   
   // Reset refs array on render
   achievementRefs.current = [];
@@ -42,162 +45,197 @@ const Achievements = () => {
     },
   ];
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  // Handle hover effects with event delegation instead of individual listeners
+  const setupHoverEffects = useCallback(() => {
+    if (!containerRef.current || hoverSetupDone.current) return;
     
-    // GSAP animations for achievements
-    const ctx = gsap.context(() => {
-      // Set initial state
-      gsap.set(achievementRefs.current, { 
-        opacity: 0,
-        y: 50,
-        xPercent: -5
+    const container = containerRef.current;
+    
+    // Use event delegation - add listeners to the parent
+    container.addEventListener('mouseover', (e) => {
+      const item = e.target.closest('.achievement-item');
+      if (!item) return;
+      
+      gsap.to(item, {
+        backgroundColor: "rgba(191, 255, 0, 0.1)",
+        x: 10,
+        duration: 0.3,
+        ease: "power2.out"
       });
       
-      // Create staggered reveal animation
-      achievementRefs.current.forEach((item, index) => {
-        gsap.to(item, {
-          opacity: 1,
-          y: 0,
-          xPercent: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom-=50",
-            end: "top center",
-            toggleActions: "play none none none",
-            // markers: true, // Debug only
-          }
+      const line = item.querySelector('.achievement-line');
+      const number = item.querySelector('.achievement-number');
+      const text = item.querySelector('.achievement-text');
+      
+      if (line) {
+        gsap.to(line, {
+          backgroundColor: "#BFFF00",
+          height: "3px",
+          duration: 0.3
         });
-        
-        // Animate line grow on scroll
-        if (item.querySelector('.achievement-line')) {
-          gsap.fromTo(item.querySelector('.achievement-line'),
-            { width: "0%" },
-            {
-              width: "100%",
-              duration: 1,
-              ease: "power2.inOut",
-              scrollTrigger: {
-                trigger: item,
-                start: "top bottom-=100",
-                end: "top center",
-                toggleActions: "play none none none",
-              }
-            }
-          );
-        }
-        
-        // Animate year text reveal
-        if (item.querySelector('.achievement-year')) {
-          gsap.fromTo(item.querySelector('.achievement-year'),
-            { opacity: 0, x: -20 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.6,
-              delay: 0.2 + (index * 0.1),
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: item,
-                start: "top bottom-=120",
-                toggleActions: "play none none none",
-              }
-            }
-          );
-        }
-        
-        // Animate category badge
-        if (item.querySelector('.achievement-category')) {
-          gsap.fromTo(item.querySelector('.achievement-category'),
-            { opacity: 0, scale: 0.8 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.5,
-              delay: 0.4 + (index * 0.1),
-              ease: "back.out(1.7)",
-              scrollTrigger: {
-                trigger: item,
-                start: "top bottom-=100",
-                toggleActions: "play none none none",
-              }
-            }
-          );
-        }
+      }
+      
+      if (number) {
+        gsap.to(number, {
+          scale: 1.2,
+          color: "#BFFF00",
+          fontWeight: "700",
+          duration: 0.3
+        });
+      }
+      
+      if (text) {
+        gsap.to(text, {
+          textShadow: "0 0 8px rgba(191, 255, 0, 0.3)",
+          color: "white",
+          duration: 0.3
+        });
+      }
+    });
+    
+    container.addEventListener('mouseout', (e) => {
+      const item = e.target.closest('.achievement-item');
+      if (!item) return;
+      
+      gsap.to(item, {
+        backgroundColor: "transparent",
+        x: 0,
+        duration: 0.5,
+        ease: "power2.out"
       });
       
-      // Hover effects using GSAP
-      achievementRefs.current.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          gsap.to(el, {
-            backgroundColor: "rgba(191, 255, 0, 0.1)",
-            x: 10,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-          
-          // Accent line animation
-          gsap.to(el.querySelector('.achievement-line'), {
-            backgroundColor: "#BFFF00",
-            height: "3px",
-            duration: 0.3
-          });
-          
-          // Scale up the number
-          gsap.to(el.querySelector('.achievement-number'), {
-            scale: 1.2,
-            color: "#BFFF00",
-            fontWeight: "700",
-            duration: 0.3
-          });
-          
-          // Text glow effect
-          gsap.to(el.querySelector('.achievement-text'), {
-            textShadow: "0 0 8px rgba(191, 255, 0, 0.3)",
-            color: "white",
-            duration: 0.3
-          });
+      const line = item.querySelector('.achievement-line');
+      const number = item.querySelector('.achievement-number');
+      const text = item.querySelector('.achievement-text');
+      
+      if (line) {
+        gsap.to(line, {
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          height: "1px",
+          duration: 0.3
         });
-        
-        el.addEventListener('mouseleave', () => {
-          gsap.to(el, {
-            backgroundColor: "transparent",
-            x: 0,
-            duration: 0.5,
-            ease: "power2.out"
-          });
-          
-          // Reset accent line
-          gsap.to(el.querySelector('.achievement-line'), {
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
-            height: "1px",
-            duration: 0.3
-          });
-          
-          // Reset number
-          gsap.to(el.querySelector('.achievement-number'), {
-            scale: 1,
-            color: "rgba(255, 255, 255, 0.6)",
-            fontWeight: "400",
-            duration: 0.3
-          });
-          
-          // Reset text
-          gsap.to(el.querySelector('.achievement-text'), {
-            textShadow: "none",
-            color: "rgba(255, 255, 255, 0.9)",
-            duration: 0.3
-          });
+      }
+      
+      if (number) {
+        gsap.to(number, {
+          scale: 1,
+          color: "rgba(255, 255, 255, 0.6)",
+          fontWeight: "400",
+          duration: 0.3
         });
-      });
-    }, containerRef);
+      }
+      
+      if (text) {
+        gsap.to(text, {
+          textShadow: "none",
+          color: "rgba(255, 255, 255, 0.9)",
+          duration: 0.3
+        });
+      }
+    });
     
-    return () => ctx.revert();
-  }, [isInView]);
+    hoverSetupDone.current = true;
+  }, []);
 
-  // Variants for Framer Motion animations
+  // Setup hover effects once after first render
+  useEffect(() => {
+    setupHoverEffects();
+  }, [setupHoverEffects]);
+
+  // Using the official @gsap/react hook with optimization
+  useGSAP(() => {
+    if (!containerRef.current || achievementRefs.current.length === 0) return;
+    
+    // Kill existing timeline if it exists
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+    }
+    
+    // Create a single timeline for better performance
+    const tl = gsap.timeline();
+    timelineRef.current = tl;
+    
+    // Set initial state once for all elements
+    gsap.set(achievementRefs.current, { 
+      opacity: 0,
+      y: 50,
+      xPercent: -5
+    });
+    
+    // Create batch animations instead of individual ones
+    achievementRefs.current.forEach((item, index) => {
+      // Create a single ScrollTrigger for each item
+      ScrollTrigger.create({
+        trigger: item,
+        start: "top bottom-=50",
+        onEnter: () => {
+          // Use a timeline for grouped animations
+          const itemTl = gsap.timeline();
+          
+          // Main item animation
+          itemTl.to(item, {
+            opacity: 1,
+            y: 0,
+            xPercent: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          });
+          
+          // Line animation
+          const line = item.querySelector('.achievement-line');
+          if (line) {
+            itemTl.fromTo(line, 
+              { width: "0%" },
+              {
+                width: "100%",
+                duration: 0.8,
+                ease: "power2.inOut"
+              },
+              "-=0.6" // Overlap with previous animation
+            );
+          }
+          
+          // Year text
+          const year = item.querySelector('.achievement-year');
+          if (year) {
+            itemTl.fromTo(year,
+              { opacity: 0, x: -20 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                ease: "power3.out"
+              },
+              "-=0.4" // Overlap with previous animation
+            );
+          }
+          
+          // Category badge
+          const category = item.querySelector('.achievement-category');
+          if (category) {
+            itemTl.fromTo(category,
+              { opacity: 0, scale: 0.8 },
+              {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                ease: "back.out(1.7)"
+              },
+              "-=0.3" // Overlap with previous animation
+            );
+          }
+        },
+        once: true // Trigger only once for better performance
+      });
+    });
+    
+  }, { 
+    scope: containerRef, 
+    dependencies: [isInView], 
+    revertOnUpdate: true // Clean up properly when dependencies change
+  });
+
+  // Variants for Framer Motion animations - simplified
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -210,14 +248,10 @@ const Achievements = () => {
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.25, 0.1, 0.25, 1]
-      }
+      transition: { duration: 0.5 }
     }
   };
 
@@ -233,12 +267,11 @@ const Achievements = () => {
         <motion.div
           key={ach.id}
           ref={el => { if (el) achievementRefs.current[index] = el }}
-          className={`achievement-item relative p-4 sm:p-6 md:p-8 lg:p-10 mb-3 md:mb-6 rounded-lg transition-all duration-300 ${
+          className={`achievement-item relative p-4 sm:p-6 md:p-8 lg:p-10 mb-3 md:mb-6 rounded-lg ${
             index === achievements.length - 1 ? 'border-b border-b-[rgba(255,255,255,0.1)]' : ''
           }`}
           variants={itemVariants}
           custom={index}
-          whileHover={{ x: 10 }}
           data-achievement-id={ach.id}
         >
           {/* Top border line with animation */}

@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from '../utils/SplitType';
@@ -13,6 +14,7 @@ const Page3 = () => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const bgGradientRef = useRef(null);
+  const contentRef = useRef(null);
   
   // Parallax scrolling effect with Framer Motion
   const { scrollYProgress } = useScroll({
@@ -25,7 +27,8 @@ const Page3 = () => {
   const bgGradientScale = useTransform(scrollYProgress, [0, 1], [0.9, 1.1]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 0.3, 0.3, 0]);
   
-  useEffect(() => {
+  // Using the official @gsap/react hook for heading animation
+  useGSAP(() => {
     // Text splitting for character animation
     const headingText = new SplitType(headingRef.current, { types: 'chars' });
     const chars = headingText.chars;
@@ -51,31 +54,35 @@ const Page3 = () => {
       }
     );
     
-    // Line animation that follows scroll progress
-    gsap.to('.achievement-progress-line', {
-      height: '100%',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top center',
-        end: 'bottom bottom-=100',
-        scrub: true
-      }
-    });
-    
-    // Clean up split text
+    // Clean up
     return () => {
       if (headingText && typeof headingText.revert === 'function') {
         headingText.revert();
       }
     };
+  }, { scope: sectionRef });
+  
+  // Parallax effects for the entire section
+  useEffect(() => {
+    // Only on desktop - prevent horizontal scroll from affecting page scroll
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 768px)", () => {
+      document.body.style.overflowX = "hidden";
+      
+      return () => {
+        document.body.style.overflowX = "";
+      };
+    });
+    
+    return () => mm.revert();
   }, []);
   
   return (
     <section 
-      id='achievements' 
+      id="achievements" 
       ref={sectionRef}
-      className='achievements-section relative w-full min-h-screen bg-[#0B0D0C] text-white overflow-hidden'
+      className="achievements-section relative w-full min-h-screen bg-[#0B0D0C] text-white overflow-hidden"
     >
       {/* Animated background gradient */}
       <motion.div 
@@ -94,31 +101,25 @@ const Page3 = () => {
       </motion.div>
       
       {/* Content container */}
-      <div className="content-wrapper relative z-10 w-full h-full flex flex-col px-5 sm:px-10 md:px-16 lg:px-28 pt-32 sm:pt-40 md:pt-60 lg:pt-96 pb-24">
-        <div className="flex items-start">
-          {/* Vertical progress line */}
-          <div className="achievement-progress-container hidden md:block w-[2px] h-full mr-8 relative">
-            <div className="achievement-progress-line absolute top-0 left-0 w-full h-0 bg-[#BFFF00]"></div>
-          </div>
-          
-          <div className="flex-1">
-            {/* Heading with motion parallax */}
-            <motion.div 
-              className="heading-container overflow-hidden mb-16 md:mb-24"
-              style={{ y: headingY }}
-            >
-              <h1 
-                ref={headingRef} 
-                className='page-3-heading exo-2-bold text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-widest'
-              >
-                ACHIEVEMENTS<span className="text-[#BFFF00]">.</span>
-              </h1>
-            </motion.div>
-            
-            {/* Achievement items */}
-            <Achievements />
-          </div>
-        </div>
+      <div 
+        ref={contentRef}
+        className="content-wrapper relative z-10 w-full h-full flex flex-col px-5 sm:px-10 md:px-16 lg:px-28 pt-32 sm:pt-40 md:pt-60 pb-24"
+      >
+        {/* Heading with motion parallax */}
+        <motion.div 
+          className="heading-container overflow-hidden mb-16 md:mb-24"
+          style={{ y: headingY }}
+        >
+          <h1 
+            ref={headingRef} 
+            className="page-3-heading exo-2-bold text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-widest"
+          >
+            ACHIEVEMENTS<span className="text-[#BFFF00]">.</span>
+          </h1>
+        </motion.div>
+        
+        {/* Achievement items - now using the redesigned component */}
+        <Achievements />
       </div>
       
       {/* Subtle texture overlay */}

@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "../utils/SplitType";
 import AnimatedMarquee from "../components/AnimatedMarquee";
 import "../styles/Page2.css";
 
@@ -16,10 +17,6 @@ const Page2 = () => {
   const photoRef = useRef(null);
   const techTextRef = useRef(null);
   const marqueeRef = useRef(null);
-  
-  // Heading characters for animated entrance
-  const headingText = "DO YOU REALLY KNOW ME?";
-  const headingChars = headingText.split("");
 
   // Framer Motion scroll animations
   const { scrollYProgress } = useScroll({
@@ -37,21 +34,30 @@ const Page2 = () => {
   useEffect(() => {
     // Create context for GSAP animations
     const ctx = gsap.context(() => {
-      // Animate heading characters
-      const headingElements = headingRef.current.querySelectorAll('.heading-char');
-      gsap.set(headingElements, { y: 50, opacity: 0 });
-      gsap.to(headingElements, {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.03,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
+      // Text splitting for character animation (just like in Page3)
+      const headingText = new SplitType(headingRef.current, { types: 'chars' });
+      const chars = headingText.chars;
+      
+      // Create staggered animation for heading
+      gsap.fromTo(chars,
+        { 
+          y: 100,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.03,
+          duration: 0.8,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top bottom-=100",
+            end: "top center",
+            scrub: 0.5
+          }
         }
-      });
+      );
       
       // Animate content lines
       const contentLines = contentRef.current.querySelectorAll('.content-line');
@@ -119,7 +125,8 @@ const Page2 = () => {
       );
     }, sectionRef); // Scope all animations to sectionRef
     
-    return () => ctx.revert(); // Cleanup animations when component unmounts
+    // Clean up split text
+    return () => ctx.revert(); // This will clean up all GSAP animations and SplitType
   }, []);
   
   // Mouse follow effect for photo
@@ -167,12 +174,11 @@ const Page2 = () => {
               style={{ y: headingY, opacity: headingOpacity }}
               className="heading-wrapper overflow-hidden mb-12 lg:mb-16"
             >
-              <h1 ref={headingRef} className="lilita-one-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider leading-tight">
-                {headingChars.map((char, index) => (
-                  <span key={index} className="heading-char inline-block">
-                    {char === " " ? "\u00A0" : char}
-                  </span>
-                ))}
+              <h1 
+                ref={headingRef} 
+                className="lilita-one-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider leading-tight"
+              >
+                DO YOU REALLY KNOW ME?
               </h1>
             </motion.div>
             
@@ -213,7 +219,6 @@ const Page2 = () => {
           >
             {/* Photo frame with pseudo-elements for decorative elements */}
             <div 
-            //   ref={photoRef}
               className="photo-frame relative w-full h-full rounded-full overflow-hidden border-2 border-[#BFFF00]/20"
               style={{ transformStyle: "preserve-3d" }}
             >
