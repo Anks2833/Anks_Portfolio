@@ -1,19 +1,21 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { BsArrowUpRight } from "react-icons/bs";
-import "../styles/Page1.css"
+import "../styles/Page1.css";
+import { 
+  handleButtonEnter, 
+  handleMouseLeave,
+  handleRevealTextEnter
+} from "../utils/CursorEffects";
 
 const Navbar = () => {
   const underlineRef = useRef(null);
 
   const handleMouseEnter = () => {
-    gsap.to(".custom-cursor", {
-      scale: 2,
-      backgroundColor: "white",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-
+    // Apply the button cursor effect with custom text
+    handleButtonEnter("Connect");
+    
+    // Keep the underline animation
     gsap.to(underlineRef.current, {
       x: 0,
       duration: 0.4,
@@ -21,14 +23,11 @@ const Navbar = () => {
     });
   };
 
-  const handleMouseLeave = () => {
-    gsap.to(".custom-cursor", {
-      scale: 1,
-      backgroundColor: "#BFFF00",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-
+  const handleNavMouseLeave = () => {
+    // Reset cursor to default state
+    handleMouseLeave();
+    
+    // Keep the underline animation
     gsap.to(underlineRef.current, {
       x: "-100%",
       duration: 0.4,
@@ -36,16 +35,27 @@ const Navbar = () => {
     });
   };
 
+  // Add hover effect for the logo
+  const handleLogoHover = () => {
+    handleRevealTextEnter("AD");
+  };
+
   return (
     <div className="w-full py-4 sm:py-6 md:py-8 lg:h-24 flex justify-between items-center px-4 sm:px-8 md:px-12 lg:px-16 text-white">
-      {/* Logo */}
-      <h1 className="grechen-fuemen-regular logo text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold italic">AD</h1>
+      {/* Logo with cursor effect */}
+      <h1 
+        className="grechen-fuemen-regular logo text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold italic"
+        onMouseEnter={handleLogoHover}
+        onMouseLeave={handleMouseLeave}
+      >
+        AD
+      </h1>
 
       {/* Connect with me - hidden on smallest screens */}
       <div
         className="relative hidden sm:flex gap-2 items-center cursor-pointer overflow-hidden"
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleNavMouseLeave}
         onClick={() => {
           window.scrollTo({ top: 3200, behavior: "smooth" });
         }}
@@ -70,6 +80,8 @@ const Navbar = () => {
       {/* Mobile connect button - only on smallest screens */}
       <div 
         className="sm:hidden flex items-center"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={() => {
           window.scrollTo({ top: 3200, behavior: "smooth" });
         }}

@@ -40,55 +40,45 @@ const AnimatedMarquee = () => {
   useEffect(() => {
     if (!isInView) return;
 
-    // Function to create a seamless animation for a row
-    const createSeamlessAnimation = (rowRef, controls, direction, speed) => {
+    // Improved function to create a truly seamless infinite animation for a row
+    const createTrulySeamlessAnimation = (rowRef, controls, direction, speed) => {
       if (!rowRef.current) return;
 
-      // Get the width of one complete set of items
-      const contentWidth = rowRef.current.offsetWidth / 3; // Divided by 3 because we have 3 sets
-
-      // The animation is different based on direction
+      // For truly seamless animation, we'll use keyframes and repeat infinitely
       if (direction === "right-to-left") {
-        // Animate from 0 to -contentWidth (moving left)
-        const animate = async () => {
-          await controls.start({
-            x: -contentWidth,
-            transition: {
+        controls.start({
+          x: [0, "-33.33%"],
+          transition: {
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
               duration: speed,
               ease: "linear",
-            },
-          });
-          // Instantly reset to starting position (no animation)
-          controls.set({ x: 0 });
-          // Repeat
-          animate();
-        };
-        animate();
+              times: [0, 1]
+            }
+          }
+        });
       } else {
-        // Animate from -contentWidth to 0 (moving right)
-        const animate = async () => {
-          await controls.start({
-            x: 0,
-            transition: {
+        controls.start({
+          x: ["-33.33%", "0%"],
+          transition: {
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
               duration: speed,
               ease: "linear",
-            },
-          });
-          // Instantly reset to starting position (no animation)
-          controls.set({ x: -contentWidth });
-          // Repeat
-          animate();
-        };
-        controls.set({ x: -contentWidth });
-        animate();
+              times: [0, 1]
+            }
+          }
+        });
       }
     };
 
     // Setup animations with different speeds for variety
-    createSeamlessAnimation(row1Ref, row1Controls, "right-to-left", 40);
-    createSeamlessAnimation(row2Ref, row2Controls, "left-to-right", 35);
-    createSeamlessAnimation(row3Ref, row3Controls, "right-to-left", 42);
-    createSeamlessAnimation(row4Ref, row4Controls, "left-to-right", 37);
+    createTrulySeamlessAnimation(row1Ref, row1Controls, "right-to-left", 60);
+    createTrulySeamlessAnimation(row2Ref, row2Controls, "left-to-right", 35);
+    createTrulySeamlessAnimation(row3Ref, row3Controls, "right-to-left", 42);
+    createTrulySeamlessAnimation(row4Ref, row4Controls, "left-to-right", 37);
   }, [row1Controls, row2Controls, row3Controls, row4Controls, isInView]);
 
   // Setup hover interactions for individual technology items
@@ -103,25 +93,35 @@ const AnimatedMarquee = () => {
     techItems.forEach((item) => {
       const handleMouseEnter = () => {
         gsap.to(item, {
-          y: -10,
-          scale: 1.1,
-          color: "#BFFF00",
+          y: 0,
           fontWeight: "700",
-          duration: 0.3,
-          ease: "power2.out",
+          WebkitTextFillColor: "#BFFF00",
+          WebkitTextStroke: "1px #BFFF00",
+          duration: 0.4,
+          ease: "power3.out",
         });
       };
 
       const handleMouseLeave = () => {
         gsap.to(item, {
           y: 0,
-          scale: 1,
           color: "white",
-          fontWeight: "600",
-          duration: 0.3,
-          ease: "power2.out",
+          fontWeight: "700",
+          WebkitTextStroke: "1px white",
+          WebkitTextFillColor: "transparent",
+          duration: 0.5,
+          ease: "power3.out",
         });
       };
+
+      // Apply initial styling
+      gsap.set(item, {
+        WebkitTextStroke: "1px white",
+        WebkitTextFillColor: "transparent",
+        position: "relative",
+        zIndex: 1,
+        transformOrigin: "center bottom", // Set transform origin for better float effect
+      });
 
       item.addEventListener("mouseenter", handleMouseEnter);
       item.addEventListener("mouseleave", handleMouseLeave);
@@ -137,17 +137,31 @@ const AnimatedMarquee = () => {
   }, [isInView]);
 
   // Generate technology items with appropriate styling
-  const renderTechItems = (tech, index) => (
-    <div
-      key={`${tech.id}-${index}`}
-      className={`tech-item exo-2-bold font-semibold cursor-pointer transition-all ${
-        tech.style === "italic" ? "font-italic" : ""
-      }`}
-      data-tech={tech.id}
-    >
-      {tech.name}
-    </div>
-  );
+  const renderTechItems = (tech, index, rowNum) => {
+    let fontSize;
+    if (rowNum === 1 || rowNum === 4) {
+      fontSize = "5rem";
+    } else {
+      fontSize = "3.5rem";
+    }
+
+    return (
+      <div
+        key={`${tech.id}-${index}`}
+        className={`tech-item cursor-pointer transition-all`}
+        data-tech={tech.id}
+        style={{
+          WebkitTextStroke: "1px white",
+          WebkitTextFillColor: "transparent",
+          fontSize: fontSize,
+          fontWeight: "900",
+          transition: "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease",
+        }}
+      >
+        {tech.name}
+      </div>
+    );
+  };
 
   return (
     <div
@@ -158,58 +172,59 @@ const AnimatedMarquee = () => {
       <div className="overlay-left absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#0B0D0C] to-transparent z-10 pointer-events-none"></div>
       <div className="overlay-right absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#0B0D0C] to-transparent z-10 pointer-events-none"></div>
 
-      {/* Row 1: Right to Left */}
+      {/* Row 1: Right to Left - LARGER FONT */}
       <div className="marquee-row">
         <motion.div
           ref={row1Ref}
           className="marquee-track"
           animate={row1Controls}
-          style={{ display: "flex", gap: "3rem" }}
+          style={{ display: "flex" }}
         >
+          {/* Only need to repeat twice for truly seamless infinite animation */}
           {[...technologies, ...technologies, ...technologies].map(
-            (tech, index) => renderTechItems(tech, `row1-${index}`)
+            (tech, index) => renderTechItems(tech, `row1-${index}`, 1)
           )}
         </motion.div>
       </div>
 
-      {/* Row 2: Left to Right */}
+      {/* Row 2: Left to Right - SMALLER FONT */}
       <div className="marquee-row">
         <motion.div
           ref={row2Ref}
           className="marquee-track"
           animate={row2Controls}
-          style={{ display: "flex", gap: "3rem" }}
+          style={{ display: "flex" }}
         >
           {[...technologies, ...technologies, ...technologies].map(
-            (tech, index) => renderTechItems(tech, `row2-${index}`)
+            (tech, index) => renderTechItems(tech, `row2-${index}`, 2)
           )}
         </motion.div>
       </div>
 
-      {/* Row 3: Right to Left */}
+      {/* Row 3: Right to Left - SMALLER FONT */}
       <div className="marquee-row">
         <motion.div
           ref={row3Ref}
           className="marquee-track"
           animate={row3Controls}
-          style={{ display: "flex", gap: "3rem" }}
+          style={{ display: "flex" }}
         >
           {[...technologies, ...technologies, ...technologies].map(
-            (tech, index) => renderTechItems(tech, `row3-${index}`)
+            (tech, index) => renderTechItems(tech, `row3-${index}`, 3)
           )}
         </motion.div>
       </div>
 
-      {/* Row 4: Left to Right */}
+      {/* Row 4: Left to Right - LARGER FONT */}
       <div className="marquee-row">
         <motion.div
           ref={row4Ref}
           className="marquee-track"
           animate={row4Controls}
-          style={{ display: "flex", gap: "3rem" }}
+          style={{ display: "flex" }}
         >
           {[...technologies, ...technologies, ...technologies].map(
-            (tech, index) => renderTechItems(tech, `row4-${index}`)
+            (tech, index) => renderTechItems(tech, `row4-${index}`, 4)
           )}
         </motion.div>
       </div>

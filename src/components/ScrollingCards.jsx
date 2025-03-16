@@ -24,7 +24,7 @@ const ScrollingCards = () => {
     }
 
     const handleVisibility2 = () => {
-        setIsVisible2(!visible2)
+        setIsVisible2(!visible2);
     }
 
     return (

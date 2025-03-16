@@ -176,9 +176,9 @@ const Page2 = () => {
             >
               <h1 
                 ref={headingRef} 
-                className="lilita-one-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider leading-tight"
+                className="lilita-one-regular text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-wider leading-tight"
               >
-                DO YOU REALLY KNOW ME?
+                ABOUT ME?
               </h1>
             </motion.div>
             

@@ -18,7 +18,7 @@ export const handleMouseEnter = (text = "") => {
   // Animate the ring
   gsap.to('.cursor-ring', {
     scale: 2,
-    borderColor: '#BFFF00',
+    borderColor: 'white',
     borderWidth: 2,
     opacity: 0.7,
     duration: 0.3,
@@ -28,7 +28,7 @@ export const handleMouseEnter = (text = "") => {
   // Animate the trail/glow
   gsap.to('.cursor-trail', {
     opacity: 0.15,
-    scale: 3,
+    scale: 10,
     duration: 0.3
   });
   
@@ -62,7 +62,7 @@ export const handleMouseEnterBig = (text = "") => {
   // Animate the ring
   gsap.to('.cursor-ring', {
     scale: 5,
-    borderColor: '#BFFF00',
+    borderColor: 'white',
     borderWidth: 1.5,
     opacity: 0.5,
     duration: 0.3,
