@@ -1,110 +1,336 @@
-/* Mobile Small Devices (320px and up) */
-@media (min-width: 300px) and (max-width: 321px) {
+/* Page3.css - Enhanced with scroll animations and visual polish */
 
-    #achievements {
-        padding-left: 40px;
-        padding-right: 0;
-        padding-top: 250px;
-        gap: 20px;
-    }
-
-    .page-3-heading {
-        font-size: 20px;
-    }
-
-    .achievements {
-        font-size: 20px;
-        line-height: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        margin-right: 40px;
-    }
-}
+/* Base section styling */
+.achievements-section {
+    position: relative;
+    background-color: #0B0D0C;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
   
+  /* Progress line styling */
+  .achievement-progress-container {
+    position: relative;
+    height: 100%;
+  }
+  
+  .achievement-progress-line {
+    background-color: #BFFF00;
+    box-shadow: 0 0 10px rgba(191, 255, 0, 0.3);
+    will-change: height;
+  }
+  
+  /* Text styling */
+  .page-3-heading {
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    line-height: 1.1;
+    will-change: transform;
+  }
+  
+  /* Create noise texture background */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+  
+  /* Achievement item styling */
+  .achievement-item {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    will-change: transform, background-color;
+  }
+  
+  .achievement-item:hover {
+    background-color: rgba(191, 255, 0, 0.1);
+    transform: translateX(10px);
+  }
+  
+  /* Line animation */
+  .achievement-line {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease, height 0.3s ease;
+    will-change: width, background-color;
+  }
+  
+  .achievement-item:hover .achievement-line {
+    background-color: #BFFF00;
+    height: 3px;
+  }
+  
+  /* Achievement number styling */
+  .achievement-number {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease, transform 0.3s ease;
+    will-change: transform, color;
+  }
+  
+  .achievement-item:hover .achievement-number {
+    color: #BFFF00;
+    transform: scale(1.2);
+  }
+  
+  /* Achievement text styling */
+  .achievement-text {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    will-change: color, text-shadow;
+  }
+  
+  .achievement-item:hover .achievement-text {
+    color: white;
+    text-shadow: 0 0 8px rgba(191, 255, 0, 0.3);
+  }
+  
+  /* Year and category badges */
+  .achievement-year {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .achievement-item:hover .achievement-year {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .achievement-category {
+    color: #BFFF00;
+    border: 1px solid rgba(191, 255, 0, 0.3);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .achievement-item:hover .achievement-category {
+    background-color: rgba(191, 255, 0, 0.1);
+    border-color: rgba(191, 255, 0, 0.6);
+  }
+  
+  /* Responsive styles */
+  
+  /* Mobile Small Devices (320px and up) */
+  @media (min-width: 300px) and (max-width: 321px) {
+    .achievements-section {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    
+    .content-wrapper {
+      padding-top: 6rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    .page-3-heading {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .achievement-item {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .achievement-number {
+      font-size: 1.25rem;
+      width: auto;
+      margin-bottom: 0.5rem;
+    }
+    
+    .achievement-text {
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+    
+    .achievement-year,
+    .achievement-category {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+    }
+  }
+    
   /* Mobile Medium Devices (375px and up) */
   @media (min-width: 322px) and (max-width: 376px) {
-    #achievements {
-        padding-left: 40px;
-        padding-right: 0;
-        padding-top: 250px;
-        gap: 20px;
+    .achievements-section {
+      padding-left: 0;
+      padding-right: 0;
     }
-
+    
+    .content-wrapper {
+      padding-top: 6rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    
     .page-3-heading {
-        font-size: 20px;
+      font-size: 2.25rem;
+      margin-bottom: 2rem;
     }
-
-    .achievements {
-        font-size: 20px;
-        line-height: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        margin-right: 40px;
+    
+    .achievement-item {
+      padding: 1.25rem;
+      margin-bottom: 1rem;
     }
-}
-  
+    
+    .achievement-number {
+      font-size: 1.5rem;
+      width: auto;
+      margin-bottom: 0.5rem;
+    }
+    
+    .achievement-text {
+      font-size: 1.125rem;
+      line-height: 1.4;
+    }
+  }
+    
   /* Mobile Large Devices (425px and up) */
   @media (min-width: 377px) and (max-width: 426px) {
-    #achievements {
-        padding-left: 40px;
-        padding-right: 0;
-        padding-top: 250px;
-        gap: 20px;
+    .achievements-section {
+      padding-left: 0;
+      padding-right: 0;
     }
-
+    
+    .content-wrapper {
+      padding-top: 6rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    
     .page-3-heading {
-        font-size: 20px;
+      font-size: 2.5rem;
+      margin-bottom: 2.5rem;
     }
-
-    .achievements {
-        font-size: 20px;
-        line-height: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        margin-right: 40px;
+    
+    .achievement-item {
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
     }
-}
-  
+    
+    .achievement-number {
+      font-size: 1.75rem;
+    }
+    
+    .achievement-text {
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+  }
+    
   /* Tablets (768px and up) */
-  @media (min-width: 427px) and (max-width: 769px) {
-    #achievements {
-        padding-left: 40px;
-        padding-right: 0;
-        padding-top: 250px;
-        gap: 50px;
+  @media (min-width: 427px) and (max-width: 769px) {  
+    .content-wrapper {
+      padding-top: 8rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
-
+    
     .page-3-heading {
-        font-size: 50px;
+      font-size: 3.5rem;
+      margin-bottom: 3rem;
     }
-
-    .achievements {
-        font-size: 20px;
-        line-height: 20px;
-        padding-top: 35px;
-        padding-bottom: 35px;
-        margin-right: 40px;
+    
+    .achievement-item {
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
     }
-}
-  
+    
+    .achievement-number {
+      font-size: 2rem;
+      width: 3rem;
+    }
+    
+    .achievement-text {
+      font-size: 1.5rem;
+      line-height: 1.4;
+    }
+    
+    .achievement-progress-container {
+      margin-right: 1.5rem;
+    }
+  }
+    
   /* Small Laptops (1024px and up) */
   @media (min-width: 770px) and (max-width: 1025px) {
-    #achievements {
-        padding-left: 40px;
-        padding-right: 0;
-        padding-top: 100px;
-        gap: 50px;
+    .content-wrapper {
+      padding-top: 10rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
     }
-
+    
     .page-3-heading {
-        font-size: 60px;
+      font-size: 4rem;
+      margin-bottom: 4rem;
     }
-
-    .achievements {
-        font-size: 20px;
-        line-height: 20px;
-        padding-top: 35px;
-        padding-bottom: 35px;
-        margin-right: 40px;
+    
+    .achievement-item {
+      padding: 2rem;
+      margin-bottom: 2rem;
     }
-}
+    
+    .achievement-number {
+      font-size: 2.25rem;
+      width: 4rem;
+    }
+    
+    .achievement-text {
+      font-size: 1.75rem;
+      line-height: 1.3;
+    }
+    
+    .achievement-progress-container {
+      margin-right: 2rem;
+    }
+  }
+  
+  /* Animation helpers */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes slideRight {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .page-3-heading,
+    .achievement-item,
+    .achievement-line,
+    .achievement-number,
+    .achievement-text,
+    .achievement-year,
+    .achievement-category,
+    .achievement-progress-line {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+    }
+  }

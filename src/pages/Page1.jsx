@@ -15,21 +15,16 @@ const Page1 = () => {
 
   // Force a height calculation after initial render
   useEffect(() => {
-    // Force a layout recalculation
     const forceReflow = () => {
       if (pageRef.current) {
-        // This forces a reflow by reading a layout property
         const height = pageRef.current.getBoundingClientRect().height;
-        console.log("Initial page height:", height);
         
-        // Force a minimum height to ensure scrollability if needed
         if (height <= window.innerHeight) {
           pageRef.current.style.minHeight = `${window.innerHeight + 100}px`;
         }
       }
     };
 
-    // Run initially and after a short delay to ensure all content is rendered
     forceReflow();
     const timer = setTimeout(forceReflow, 100);
 
@@ -40,10 +35,8 @@ const Page1 = () => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true);
-        console.log("Scrolled down");
       } else {
         setIsScrolled(false);
-        console.log("Scrolled up");
       }
     };
 
@@ -103,7 +96,7 @@ const Page1 = () => {
       <Navbar />
       <Page1Content />
 
-      {/* The bottom content */}
+      {/* The bottom content - responsive with CSS class names */}
       <div className='page-1-bottom absolute bottom-28 w-full flex justify-between px-10 pr-20 text-white'>
         {/* Scroll to explore div */}
         <div className={`flex items-start gap-2 ${isScrolled ? "opacity-0 duration-500 transition-all" : "opacity-100 transition-all"}`}>
@@ -139,7 +132,7 @@ const Page1 = () => {
             className="absolute bottom-4 left-0 h-[1px] bg-white"
             style={{
               width: "100%",
-              transform: "translateX(-100%)", // Start hidden
+              transform: "translateX(-100%)",
             }}
           />
         </NavLink>

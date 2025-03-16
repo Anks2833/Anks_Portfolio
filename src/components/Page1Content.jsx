@@ -4,39 +4,162 @@ import "../styles/Page1.css"
 
 const Page1Content = () => {
     const contentRef = useRef(null);
+    
+    // Desktop paragraph refs
+    const para1Ref = useRef(null);
+    const para2Ref = useRef(null);
+    const para3Ref = useRef(null);
+    const para4Ref = useRef(null);
+    
+    // Mobile paragraph refs
+    const mobileRefs = Array(9).fill(0).map(() => useRef(null));
 
     useEffect(() => {
+        // Main mouse tracking effect
         const handleMouseMove = (event) => {
             const { clientX, clientY } = event;
-            const { left, top, width, height } = contentRef.current.getBoundingClientRect();
-            const x = clientX - (left + width / 2);
-            const y = clientY - (top + height / 2);
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // Calculate mouse position relative to the center of the window
+            // Values will range from -1 to 1 for both x and y
+            const x = (clientX / windowWidth) * 2 - 1;
+            const y = (clientY / windowHeight) * 2 - 1;
 
-            const rotateX = (y / height) * 50;
-            const rotateY = -(x / width) * 70;
-
-            gsap.to(contentRef.current, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-                duration: 0.3,
-                ease: 'power2.out',
+            // Desktop paragraphs - each will have a unique 3D rotation
+            const desktopParagraphs = [para1Ref, para2Ref, para3Ref, para4Ref];
+            
+            // Apply different rotation intensities to each paragraph
+            desktopParagraphs.forEach((paraRef, index) => {
+                if (!paraRef.current) return;
+                
+                // Different paragraphs have different movement intensity
+                // The first paragraphs move more than later ones
+                const intensityFactor = 1 - (index * 0.15);
+                
+                // Calculate rotation angles - limit to a reasonable range
+                const rotateY = x * 15 * intensityFactor; // horizontal rotation
+                const rotateX = -y * 10 * intensityFactor; // vertical rotation
+                
+                // Apply 3D transform with GSAP
+                gsap.to(paraRef.current, {
+                    rotateY: rotateY,
+                    rotateX: rotateX,
+                    transformPerspective: 1000,
+                    transformOrigin: "center center",
+                    z: x * y * 20, // subtle z-axis movement for parallax
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
             });
+            
+            // Mobile paragraphs - apply similar effect with adjusted intensities
+            mobileRefs.forEach((ref, index) => {
+                if (!ref.current) return;
+                
+                const intensityFactor = 0.7 - (index * 0.07);
+                const rotateY = x * 10 * intensityFactor;
+                const rotateX = -y * 8 * intensityFactor;
+                
+                gsap.to(ref.current, {
+                    rotateY: rotateY,
+                    rotateX: rotateX,
+                    transformPerspective: 800,
+                    transformOrigin: "center center",
+                    z: x * y * 10, // reduced z-movement for mobile
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+            
+            // Light container tilt for background
+            if (contentRef.current) {
+                gsap.to(contentRef.current, {
+                    rotateY: x * 5,
+                    rotateX: -y * 5,
+                    duration: 0.8,
+                    ease: "power1.out",
+                });
+            }
         };
 
+        // Reset animations when mouse leaves
         const handleMouseLeave = () => {
-            gsap.set(contentRef.current, {
-                rotateX: 0,
-                rotateY: 0,
+            // Reset desktop paragraphs
+            [para1Ref, para2Ref, para3Ref, para4Ref].forEach(ref => {
+                if (ref.current) {
+                    gsap.to(ref.current, {
+                        rotateX: 0,
+                        rotateY: 0,
+                        z: 0,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    });
+                }
+            });
+            
+            // Reset mobile paragraphs
+            mobileRefs.forEach(ref => {
+                if (ref.current) {
+                    gsap.to(ref.current, {
+                        rotateX: 0,
+                        rotateY: 0,
+                        z: 0,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    });
+                }
+            });
+            
+            // Reset container
+            if (contentRef.current) {
+                gsap.to(contentRef.current, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            }
+        };
+        
+        // Add touch support for mobile
+        const handleTouchMove = (event) => {
+            if (event.touches.length !== 1) return;
+            
+            const touch = event.touches[0];
+            
+            // Create a simplified version of the mouse effect for touch
+            const touchX = (touch.clientX / window.innerWidth) * 2 - 1;
+            const touchY = (touch.clientY / window.innerHeight) * 2 - 1;
+            
+            // Apply reduced movement for touch devices
+            const touchFactor = 0.5;
+            
+            mobileRefs.forEach((ref, index) => {
+                if (!ref.current) return;
+                
+                const intensity = Math.max(0.2, 0.5 - (index * 0.05));
+                
+                gsap.to(ref.current, {
+                    rotateY: touchX * 8 * intensity * touchFactor,
+                    rotateX: -touchY * 6 * intensity * touchFactor,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
             });
         };
 
-        const element = contentRef.current;
-        element.addEventListener('mousemove', handleMouseMove);
-        element.addEventListener('mouseleave', handleMouseLeave);
+        // Add event listeners
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
+        window.addEventListener('touchmove', handleTouchMove);
+        window.addEventListener('touchend', handleMouseLeave);
 
         return () => {
-            element.removeEventListener('mousemove', handleMouseMove);
-            element.removeEventListener('mouseleave', handleMouseLeave);
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseleave', handleMouseLeave);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleMouseLeave);
         };
     }, []);
 
@@ -60,12 +183,11 @@ const Page1Content = () => {
 
     return (
         <>
-
             {/* Content Container */}
             <div className='content-container w-full h-screen hidden sm:hidden md:flex lg:flex text-white justify-center'>
                 <div
                     ref={contentRef}
-                    className='w-full md:h-[70vh] lg:h-[100vh] flex flex-col  md:justify-center lg:justify-start items-center ml-12'
+                    className='w-full md:h-[70vh] lg:h-[100vh] flex flex-col md:justify-center lg:justify-start items-center ml-12'
                     style={{
                         perspective: '1000px',
                         transformStyle: 'preserve-3d',
@@ -74,36 +196,60 @@ const Page1Content = () => {
                 >
                     {/* Para1 */}
                     <p
-                        className='text-[5vw] text-center font-light tracking-wider'
+                        ref={para1Ref}
+                        className='text-[5vw] text-center font-light tracking-wider mb-2'
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden',
+                            willChange: 'transform'
+                        }}
                     >
                         <span className='italic'>"Hello, I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
                     </p>
 
                     {/* Para2 */}
                     <p
-                        className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
+                        ref={para2Ref}
+                        className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider mb-2'
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden',
+                            willChange: 'transform'
+                        }}
                     >
                         FULLSTACK WEB DEVELOPER
                     </p>
 
                     {/* Para3 */}
                     <p
-                        className='text-[5vw] text-center font-light italic tracking-wider'
+                        ref={para3Ref}
+                        className='text-[5vw] text-center font-light italic tracking-wider mb-2'
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden',
+                            willChange: 'transform'
+                        }}
                     >
                         based in India, I'm also specialized in
                     </p>
 
                     {/* Para4 */}
                     <p
+                        ref={para4Ref}
                         className='text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider'
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden',
+                            willChange: 'transform'
+                        }}
                     >
                         GAME DEVELOPMENT<span className='font-light italic text-black'>"</span>
                     </p>
@@ -114,49 +260,117 @@ const Page1Content = () => {
             <div className='w-full h-screen flex sm:flex md:hidden lg:hidden text-white justify-center'>
                 <div
                     ref={contentRef}
-                    className='w-full h-[80vh] flex flex-col justify-center items-start ml-8'>
+                    className='w-full h-[80vh] flex flex-col justify-center items-start px-8'
+                    style={{
+                        perspective: '800px',
+                        transformStyle: 'preserve-3d'
+                    }}
+                >
                     {/* Para1 */}
-                    <p className='text-5xl text-center font-light tracking-wider'>
+                    <p 
+                        ref={mobileRefs[0]} 
+                        className='text-5xl text-center font-light tracking-wider mb-1'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         <span className='italic text-6xl'>"Hello,</span>
                     </p>
 
                     {/* Para2 */}
-                    <p className='text-5xl'>
+                    <p 
+                        ref={mobileRefs[1]} 
+                        className='text-5xl mb-1'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         <span>I'm</span> <span className='font-bold'>ANKUR</span><span className='italic'>, a</span>
                     </p>
 
-                    {/* Para2 */}
-                    <p className='text-5xl text-center font-bold w-fit tracking-wider'>
+                    {/* Para3 */}
+                    <p 
+                        ref={mobileRefs[2]} 
+                        className='text-5xl text-center font-bold w-fit tracking-wider mb-1'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         FULLSTACK
                     </p>
 
-                    <p className='text-5xl font-bold'>
+                    <p 
+                        ref={mobileRefs[3]} 
+                        className='text-5xl font-bold mb-1'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         WEB
                     </p>
 
-                    <p className='text-5xl font-bold'>
+                    <p 
+                        ref={mobileRefs[4]} 
+                        className='text-5xl font-bold mb-3'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         DEVELOPER
                     </p>
 
-                    {/* Para3 */}
-                    <p className='text-5xl text-left font-light italic tracking-wider'>
+                    {/* Para4 */}
+                    <p 
+                        ref={mobileRefs[5]} 
+                        className='text-5xl text-left font-light italic tracking-wider mb-1'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         based in India,
                     </p>
 
-                    <p className='text-5xl'>
+                    <p 
+                        ref={mobileRefs[6]} 
+                        className='text-5xl mb-3'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         I'm also specialized in
                     </p>
 
-                    {/* Para4 */}
-                    <p className='text-5xl text-left font-bold w-fit tracking-wider'>
+                    {/* Para5 */}
+                    <p 
+                        ref={mobileRefs[7]} 
+                        className='text-5xl text-left font-bold w-fit tracking-wider mb-1'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         GAME
                     </p>
 
-                    <p className='text-4xl font-bold'>
+                    <p 
+                        ref={mobileRefs[8]} 
+                        className='text-4xl font-bold'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            backfaceVisibility: 'hidden'
+                        }}
+                    >
                         DEVELOPMENT"
                     </p>
                 </div>
-            </div >
+            </div>
         </>
     );
 }

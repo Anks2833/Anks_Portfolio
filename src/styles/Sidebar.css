@@ -1,0 +1,276 @@
+.sidebar-main-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 100vh;
+    background-color: #18181b;
+    overflow: hidden;
+}
+
+.sidebar-social-links {
+    position: relative;
+    width: 60px;
+    height: 100%;
+    z-index: 20;
+}
+
+.sidebar-dark-column {
+    position: absolute;
+    left: 12px;
+    width: 30%;
+    height: 100%;
+    background-color: black;
+    z-index: 0;
+}
+
+.sidebar-close-button {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    z-index: 20;
+}
+
+.close-button-inner {
+    position: relative;
+    background-color: black;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.close-button-bg {
+    position: absolute;
+    inset: 0;
+    background-color: #BFFF00;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+
+.close-button-inner:hover .close-button-bg {
+    transform: scale(1);
+}
+
+.close-button-icon {
+    position: relative;
+    z-index: 10;
+    font-size: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.close-button-inner:hover .close-button-icon {
+    color: black;
+    transform: rotate(90deg);
+}
+
+.sidebar-nav-links {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 75%;
+}
+
+.nav-link-item {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
+}
+
+.nav-link-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.link-text {
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.link-id {
+    font-size: 20px;
+    margin-top: 4px;
+    transition: all 0.3s ease;
+}
+
+.link-line {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-bg-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #BFFF00;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+@media screen and (max-width: 320px) {
+    .sidebar-main-container {
+        width: 100vw;
+    }
+
+    .sidebar-social-links {
+        width: 30px;
+    }
+
+    .sidebar-dark-column {
+        left: 8px;
+        width: 25%;
+    }
+
+    .sidebar-nav-links {
+        left: 50px;
+        gap: 10px;
+        width: 80%;
+    }
+
+    .link-text {
+        font-size: 16px;
+    }
+
+    .link-id {
+        font-size: 14px;
+        margin-top: 2px;
+    }
+
+    .close-button-inner {
+        padding: 8px;
+    }
+
+    .close-button-icon {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    .sidebar-main-container {
+        width: 100vw;
+    }
+
+    .sidebar-social-links {
+        width: 40px;
+    }
+
+    .sidebar-dark-column {
+        left: 10px;
+        width: 28%;
+    }
+
+    .sidebar-nav-links {
+        left: 60px;
+        gap: 12px;
+    }
+
+    .link-text {
+        font-size: 18px;
+    }
+
+    .link-id {
+        font-size: 16px;
+    }
+
+    .close-button-inner {
+        padding: 10px;
+    }
+
+    .close-button-icon {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 480px) {
+    .sidebar-main-container {
+        width: 100vw;
+    }
+
+    .sidebar-nav-links {
+        left: 80px;
+        gap: 14px;
+    }
+
+    .link-text {
+        font-size: 20px;
+    }
+
+    .link-id {
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .sidebar-main-container {
+        width: 100vw;
+    }
+
+    .sidebar-nav-links {
+        left: 80px;
+        gap: 16px;
+    }
+
+    .link-text {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .sidebar-main-container {
+        max-width: 450px;
+    }
+
+    .sidebar-nav-links {
+        gap: 20px;
+    }
+
+    .link-text {
+        font-size: 28px;
+    }
+
+    .link-id {
+        font-size: 22px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .sidebar-main-container {
+        max-width: 500px;
+    }
+
+    .sidebar-nav-links {
+        gap: 24px;
+    }
+
+    .link-text {
+        font-size: 32px;
+    }
+
+    .link-id {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .sidebar-nav-links {
+        gap: 10px;
+    }
+
+    .link-text {
+        font-size: 18px;
+    }
+
+    .link-id {
+        font-size: 16px;
+    }
+}

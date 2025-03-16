@@ -1,5 +1,5 @@
 /* Mobile Small Devices (320px and up) */
-@media (min-width: 300px) and (max-width: 320px) {
+@media screen and (max-width: 320px) {
     .sidebar-trigger {
         top: 40vh;
     }
@@ -28,7 +28,7 @@
 
     .view-in-3d {
         font-size: 13px;
-        padding-bottom: 20px;
+        padding-bottom: 40px;
     }
 
     .scroll-text {
@@ -37,7 +37,7 @@
 }
   
   /* Mobile Medium Devices (375px and up) */
-  @media (min-width: 321px) and (max-width: 375px) {
+  @media screen and (max-width: 375px) {
     .sidebar-trigger {
         top: 40vh;
     }
@@ -66,7 +66,7 @@
 
     .view-in-3d {
         font-size: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 40px;
     }
 
     .scroll-text {
@@ -75,7 +75,7 @@
 }
   
   /* Mobile Large Devices (425px and up) */
-  @media (min-width: 376px) and (max-width: 425px) {
+  @media screen and (max-width: 480px) {
     .sidebar-trigger {
         top: 40vh;
     }
@@ -104,7 +104,7 @@
 
     .view-in-3d {
         font-size: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 40px;
     }
 
     .scroll-text {

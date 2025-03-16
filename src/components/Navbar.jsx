@@ -4,11 +4,9 @@ import { BsArrowUpRight } from "react-icons/bs";
 import "../styles/Page1.css"
 
 const Navbar = () => {
-  const underlineRef = useRef(null); // Ref for the underline
+  const underlineRef = useRef(null);
 
-  // Function to handle hover effect
   const handleMouseEnter = () => {
-    // Cursor animation
     gsap.to(".custom-cursor", {
       scale: 2,
       backgroundColor: "white",
@@ -16,7 +14,6 @@ const Navbar = () => {
       ease: "power2.out",
     });
 
-    // Underline slides in
     gsap.to(underlineRef.current, {
       x: 0,
       duration: 0.4,
@@ -25,7 +22,6 @@ const Navbar = () => {
   };
 
   const handleMouseLeave = () => {
-    // Cursor animation
     gsap.to(".custom-cursor", {
       scale: 1,
       backgroundColor: "#BFFF00",
@@ -33,7 +29,6 @@ const Navbar = () => {
       ease: "power2.out",
     });
 
-    // Underline slides out
     gsap.to(underlineRef.current, {
       x: "-100%",
       duration: 0.4,
@@ -42,14 +37,13 @@ const Navbar = () => {
   };
 
   return (
-    // Navbar container
-    <div className="nav-container w-full h-[6vw] flex justify-between items-center px-16 text-white">
+    <div className="w-full py-4 sm:py-6 md:py-8 lg:h-24 flex justify-between items-center px-4 sm:px-8 md:px-12 lg:px-16 text-white">
       {/* Logo */}
-      <h1 className="grechen-fuemen-regular logo text-[2.6vw] font-extrabold italic">AD</h1>
+      <h1 className="grechen-fuemen-regular logo text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold italic">AD</h1>
 
-      {/* Connect with me */}
+      {/* Connect with me - hidden on smallest screens */}
       <div
-        className="relative w-fit flex gap-2 items-center cursor-pointer overflow-hidden"
+        className="relative hidden sm:flex gap-2 items-center cursor-pointer overflow-hidden"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => {
@@ -57,21 +51,30 @@ const Navbar = () => {
         }}
       >
         {/* Text */}
-        <h1 className="grechen-fuemen-regular connect-text text-[1.2vw] font-extralight">CONNECT WITH ME</h1>
+        <h1 className="grechen-fuemen-regular connect-text text-sm sm:text-base md:text-md lg:text-md font-extralight">CONNECT WITH ME</h1>
         {/* Arrow */}
-        <div className="text-[1.5vw]">
+        <div className="text-sm sm:text-base md:text-lg lg:text-xl">
           <BsArrowUpRight className="connect-icon" />
         </div>
 
         {/* Underline */}
         <div
           ref={underlineRef}
-          className="absolute bottom-0 left-0 h-[1px] bg-white"
+          className="absolute bottom-0 left-0 h-[1px] bg-white w-full"
           style={{
-            width: "100%",
-            transform: "translateX(-100%)", // Start hidden
+            transform: "translateX(-100%)", 
           }}
         />
+      </div>
+      
+      {/* Mobile connect button - only on smallest screens */}
+      <div 
+        className="sm:hidden flex items-center"
+        onClick={() => {
+          window.scrollTo({ top: 3200, behavior: "smooth" });
+        }}
+      >
+        <BsArrowUpRight className="text-xl" />
       </div>
     </div>
   );
