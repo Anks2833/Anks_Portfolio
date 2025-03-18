@@ -2,10 +2,10 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { BsArrowUpRight } from "react-icons/bs";
 import "../styles/Page1.css";
-import { 
-  handleButtonEnter, 
+import {
+  handleButtonEnter,
   handleMouseLeave,
-  handleRevealTextEnter
+  handleRevealTextEnter,
 } from "../utils/CursorEffects";
 
 const Navbar = () => {
@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleMouseEnter = () => {
     // Apply the button cursor effect with custom text
     handleButtonEnter("Connect");
-    
+
     // Keep the underline animation
     gsap.to(underlineRef.current, {
       x: 0,
@@ -26,7 +26,7 @@ const Navbar = () => {
   const handleNavMouseLeave = () => {
     // Reset cursor to default state
     handleMouseLeave();
-    
+
     // Keep the underline animation
     gsap.to(underlineRef.current, {
       x: "-100%",
@@ -35,19 +35,10 @@ const Navbar = () => {
     });
   };
 
-  // Add hover effect for the logo
-  const handleLogoHover = () => {
-    handleRevealTextEnter("AD");
-  };
-
   return (
     <div className="w-full py-4 sm:py-6 md:py-8 lg:h-24 flex justify-between items-center px-4 sm:px-8 md:px-12 lg:px-16 text-white">
       {/* Logo with cursor effect */}
-      <h1 
-        className="grechen-fuemen-regular logo text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold italic"
-        onMouseEnter={handleLogoHover}
-        onMouseLeave={handleMouseLeave}
-      >
+      <h1 className="grechen-fuemen-regular logo text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold italic">
         AD
       </h1>
 
@@ -57,11 +48,13 @@ const Navbar = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleNavMouseLeave}
         onClick={() => {
-          window.scrollTo({ top: 3200, behavior: "smooth" });
+          window.scrollTo({ top: 5500, behavior: "smooth" });
         }}
       >
         {/* Text */}
-        <h1 className="grechen-fuemen-regular connect-text text-sm sm:text-base md:text-md lg:text-md font-extralight">CONNECT WITH ME</h1>
+        <h1 className="grechen-fuemen-regular connect-text text-sm sm:text-base md:text-md lg:text-md font-extralight">
+          CONNECT WITH ME
+        </h1>
         {/* Arrow */}
         <div className="text-sm sm:text-base md:text-lg lg:text-xl">
           <BsArrowUpRight className="connect-icon" />
@@ -72,13 +65,13 @@ const Navbar = () => {
           ref={underlineRef}
           className="absolute bottom-0 left-0 h-[1px] bg-white w-full"
           style={{
-            transform: "translateX(-100%)", 
+            transform: "translateX(-100%)",
           }}
         />
       </div>
-      
+
       {/* Mobile connect button - only on smallest screens */}
-      <div 
+      <div
         className="sm:hidden flex items-center"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

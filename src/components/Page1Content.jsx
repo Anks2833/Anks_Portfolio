@@ -1,6 +1,12 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { handleMouseEnterBig, handleMouseLeave } from "../utils/CursorEffects";
+import {
+  handleMouseEnterBig,
+  handleMouseLeave,
+  handleRevealTextEnter,
+  handleButtonEnter,
+  handleDraggableEnter
+} from "../utils/CursorEffects";
 import "../styles/Page1.css";
 
 const Page1Content = () => {
@@ -87,7 +93,7 @@ const Page1Content = () => {
     };
 
     // Reset animations when mouse leaves
-    const handleMouseLeave = () => {
+    const resetAnimations = () => {
       // Reset desktop paragraphs
       [para1Ref, para2Ref, para3Ref, para4Ref].forEach((ref) => {
         if (ref.current) {
@@ -154,35 +160,17 @@ const Page1Content = () => {
 
     // Add event listeners
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mouseleave", resetAnimations);
     window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchend", handleMouseLeave);
+    window.addEventListener("touchend", resetAnimations);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mouseleave", resetAnimations);
       window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleMouseLeave);
+      window.removeEventListener("touchend", resetAnimations);
     };
   }, []);
-
-  const handleMouseEnter = () => {
-    gsap.to(".custom-cursor", {
-      scale: 6,
-      backgroundColor: "white",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  };
-
-  const handleMouseLeave = () => {
-    gsap.to(".custom-cursor", {
-      scale: 1,
-      backgroundColor: "#BFFF00",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  };
 
   return (
     <>
@@ -190,7 +178,9 @@ const Page1Content = () => {
       <div className="content-container w-full h-screen hidden sm:hidden md:flex lg:flex text-white justify-center">
         <div
           ref={contentRef}
-          className="w-full md:h-[70vh] lg:h-[100vh] flex flex-col md:justify-center lg:justify-start items-center ml-12"
+          className="w-fit md:h-[70vh] lg:h-fit flex flex-col md:justify-center lg:justify-start items-center ml-12"
+          onMouseEnter={() => handleMouseEnterBig("Hello")}
+          onMouseLeave={handleMouseLeave}
           style={{
             perspective: "1000px",
             transformStyle: "preserve-3d",
@@ -201,8 +191,6 @@ const Page1Content = () => {
           <p
             ref={para1Ref}
             className="text-[5vw] text-center font-light tracking-wider mb-2"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             style={{
               transformStyle: "preserve-3d",
               backfaceVisibility: "hidden",
@@ -218,8 +206,6 @@ const Page1Content = () => {
           <p
             ref={para2Ref}
             className="text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider mb-2"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             style={{
               transformStyle: "preserve-3d",
               backfaceVisibility: "hidden",
@@ -233,8 +219,6 @@ const Page1Content = () => {
           <p
             ref={para3Ref}
             className="text-[5vw] text-center font-light italic tracking-wider mb-2"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             style={{
               transformStyle: "preserve-3d",
               backfaceVisibility: "hidden",
@@ -248,8 +232,6 @@ const Page1Content = () => {
           <p
             ref={para4Ref}
             className="text-[5vw] text-center font-bold text-zinc-950 bg-[#BFFF00] w-fit tracking-wider"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             style={{
               transformStyle: "preserve-3d",
               backfaceVisibility: "hidden",

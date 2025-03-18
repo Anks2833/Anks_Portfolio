@@ -1,11 +1,5 @@
 import { gsap } from 'gsap';
 
-/**
- * Enhanced cursor effects that work with the multi-element cursor system
- * These functions provide various cursor animations for different interactive elements
- */
-
-// Standard hover effect (medium size)
 export const handleMouseEnter = (text = "") => {
   // Animate the dot (center)
   gsap.to('.cursor-dot', {
@@ -53,7 +47,7 @@ export const handleMouseEnter = (text = "") => {
 export const handleMouseEnterBig = (text = "") => {
   // Animate the dot (center)
   gsap.to('.cursor-dot', {
-    scale: 0.3,
+    scale: 1.5,
     backgroundColor: 'white',
     duration: 0.3,
     ease: 'power2.out',
@@ -63,8 +57,6 @@ export const handleMouseEnterBig = (text = "") => {
   gsap.to('.cursor-ring', {
     scale: 5,
     borderColor: 'white',
-    borderWidth: 1.5,
-    opacity: 0.5,
     duration: 0.3,
     ease: 'power2.out',
   });
@@ -72,7 +64,7 @@ export const handleMouseEnterBig = (text = "") => {
   // Animate the trail/glow
   gsap.to('.cursor-trail', {
     opacity: 0.2,
-    scale: 6,
+    scale: 20,
     duration: 0.4,
     ease: 'power1.out'
   });
@@ -96,7 +88,6 @@ export const handleMouseEnterBig = (text = "") => {
 
 // Unique style for specific interactive elements (flashing effect)
 export const handleCursorChangeStyle = (text = "") => {
-  // Create a flashing/pulsing effect
   gsap.timeline({repeat: 1, yoyo: true})
     .to('.cursor-dot', {
       scale: 0.2,
@@ -241,7 +232,6 @@ export const handleButtonEnter = (text = "Click") => {
     scale: 1.5,
     borderColor: '#BFFF00',
     backgroundColor: 'rgba(191, 255, 0, 0.1)',
-    borderWidth: 2,
     opacity: 0.7,
     duration: 0.3,
     ease: 'power2.out',

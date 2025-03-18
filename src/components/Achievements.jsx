@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { handleMouseEnterBig, handleMouseLeave } from '../utils/CursorEffects';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -31,13 +31,10 @@ const Achievements = () => {
     }
   };
 
-  // Setup GSAP animations for each achievement item
   useEffect(() => {
     achievementsRefs.current.forEach((item, index) => {
-      // Create the hover effect with GSAP
       const hoverTl = gsap.timeline({ paused: true });
       
-      // Get the text and line elements within this achievement
       const text = item.querySelector('.achievement-text');
       const idText = item.querySelector('.achievement-id');
       const line = item.querySelector('.line-progress');
@@ -59,11 +56,9 @@ const Achievements = () => {
           ease: 'power2.out' 
         }, 0);
       
-      // Setup hover interaction
       item.addEventListener('mouseenter', () => hoverTl.play());
       item.addEventListener('mouseleave', () => hoverTl.reverse());
       
-      // Initial reveal animation with ScrollTrigger
       gsap.fromTo(
         item,
         { 
@@ -108,7 +103,7 @@ const Achievements = () => {
     });
     
     // Call the original mouse handler
-    handleMouseEnterBig(e);
+    handleMouseEnterBig();
   };
 
   const handleItemMouseLeave = (e, index) => {
