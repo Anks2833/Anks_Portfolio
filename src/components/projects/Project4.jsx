@@ -11,7 +11,7 @@ const Project4 = () => {
       <div
         key={cardData[3].id}
         className='relative w-[30vw] h-[40vw] overflow-hidden group'
-        onMouseEnter={handleMouseEnterBig}
+        onMouseEnter={() => handleMouseEnterBig("InDesign")}
         onMouseLeave={handleMouseLeave}
       >
         <div className='image-4 w-full h-full bg-white p-6'>

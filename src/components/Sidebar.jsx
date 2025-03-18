@@ -1,18 +1,23 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
 import { AiOutlineClose } from "react-icons/ai";
 import SidebarLinks from "./SidebarLinks";
 import { handleMouseEnter, handleMouseLeave } from "../utils/CursorEffects";
+import Lenis from "@studio-freight/lenis";
 import '../styles/Sidebar.css';
 
 const Sidebar = ({ isVisible, onClose }) => {
   const sidebarRef = useRef(null);
   const overlayRef = useRef(null);
+  const videoContainerRef = useRef(null);
   const closeButtonRef = useRef(null);
   const linksContainerRef = useRef(null);
   const linkRefs = useRef([]);
   const sidebarContainerRef = useRef(null);
+  const videoRef = useRef(null);
+  const lenisRef = useRef(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const navLinks = [
     { id: "01", name: "Home", scrollTop: "0" },
@@ -21,6 +26,46 @@ const Sidebar = ({ isVisible, onClose }) => {
     { id: "04", name: "Projects", scrollTop: "2350" },
     { id: "05", name: "Contact Me", scrollTop: "3200" },
   ];
+  
+  // Initialize Lenis for smooth scrolling when sidebar closes
+  useEffect(() => {
+    if (!isVisible) {
+      // Initialize Lenis
+      lenisRef.current = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      });
+      
+      // Connect Lenis to RAF
+      function raf(time) {
+        if (lenisRef.current) {
+          lenisRef.current.raf(time);
+          requestAnimationFrame(raf);
+        }
+      }
+      
+      requestAnimationFrame(raf);
+      
+      return () => {
+        if (lenisRef.current) {
+          lenisRef.current.destroy();
+        }
+      };
+    } else {
+      // Destroy Lenis when sidebar is visible to prevent conflicts
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
+    }
+  }, [isVisible]);
   
   // Control body scrolling when sidebar is active
   useEffect(() => {
@@ -43,6 +88,21 @@ const Sidebar = ({ isVisible, onClose }) => {
       body.style.width = '100%';
       body.style.height = '100%';
       body.style.top = `-${scrollY}px`;
+      
+      // Video handling with high quality settings
+      if (videoRef.current) {
+        // Reset video position to start
+        videoRef.current.currentTime = 0;
+        
+        // Set quality attributes
+        videoRef.current.setAttribute('playsinline', '');
+        videoRef.current.setAttribute('muted', '');
+        
+        // Attempt to set highest quality where supported
+        if (videoRef.current.canPlayType) {
+          videoRef.current.play().catch(e => console.log('Video play prevented:', e));
+        }
+      }
     } else {
       // Restore scrolling when sidebar is closed
       const scrollY = parseInt(body.style.top || '0', 10) * -1;
@@ -54,6 +114,11 @@ const Sidebar = ({ isVisible, onClose }) => {
       
       // Restore scroll position
       window.scrollTo(0, scrollY);
+      
+      // Pause video when sidebar closes
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
     }
     
     return () => {
@@ -81,12 +146,26 @@ const Sidebar = ({ isVisible, onClose }) => {
         // Create a timeline for the opening animation
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-        // Overlay animation
+        // Video container animation - ensure it covers everything
+        tl.fromTo(
+          videoContainerRef.current,
+          {
+            opacity: 0
+          },
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.inOut",
+          },
+          0
+        );
+
+        // Solid background overlay animation (for backup behind video)
         tl.to(
           overlayRef.current,
           {
-            opacity: 1, // Full black overlay
-            duration: 0.6,
+            opacity: 1, // Fully opaque
+            duration: 0.4,
             ease: "power2.inOut",
           },
           0
@@ -108,7 +187,7 @@ const Sidebar = ({ isVisible, onClose }) => {
           0.6
         );
 
-        // Staggered links animation
+        // Staggered links animation with enhanced effects
         tl.fromTo(
           linkRefs.current,
           {
@@ -126,6 +205,30 @@ const Sidebar = ({ isVisible, onClose }) => {
           },
           0.3
         );
+        
+        // Letter animation for links
+        linkRefs.current.forEach((link, idx) => {
+          const chars = link.querySelectorAll('.inline-block');
+          if (chars.length) {
+            gsap.fromTo(
+              chars,
+              { 
+                y: 40,
+                opacity: 0,
+                rotateX: 30
+              },
+              {
+                y: 0,
+                opacity: 1,
+                rotateX: 0,
+                stagger: 0.02,
+                duration: 0.8,
+                delay: 0.3 + (idx * 0.05),
+                ease: "power2.out"
+              }
+            );
+          }
+        });
       }
     });
 
@@ -161,28 +264,62 @@ const Sidebar = ({ isVisible, onClose }) => {
       });
     }
 
-    // Ripple effect on the background
+    // Enhanced ripple effect on the background
     if (isEntering) {
       const link = linkRefs.current[index];
       const rect = link.getBoundingClientRect();
 
-      gsap.fromTo(
-        ".sidebar-bg-ripple",
-        {
-          left: rect.left + rect.width / 2,
-          top: rect.top + rect.height / 2,
-          width: 0,
-          height: 0,
-          opacity: 0.2,
-        },
-        {
-          width: window.innerWidth * 0.5,
-          height: window.innerHeight * 0.15,
-          opacity: 0,
-          duration: 0.8,
-        }
-      );
+      // Create multiple ripples for a more dynamic effect
+      for (let i = 0; i < 3; i++) {
+        const delay = i * 0.2;
+        const scale = 0.7 + (i * 0.3);
+        
+        gsap.fromTo(
+          ".sidebar-bg-ripple" + (i === 0 ? "" : `-${i}`),
+          {
+            left: rect.left + rect.width / 2,
+            top: rect.top + rect.height / 2,
+            width: 0,
+            height: 0,
+            opacity: 0.15 - (i * 0.03),
+          },
+          {
+            width: window.innerWidth * 0.5 * scale,
+            height: window.innerHeight * 0.15 * scale,
+            opacity: 0,
+            duration: 0.8 + (i * 0.2),
+            delay: delay,
+          }
+        );
+      }
+      
+      // Enhanced video effect on hover (more subtle with color shift)
+      if (videoRef.current) {
+        gsap.to(videoRef.current, {
+          filter: "hue-rotate(15deg) brightness(1.1)",
+          duration: 0.5,
+        });
+      }
+    } else {
+      // Reset video effect
+      if (videoRef.current) {
+        gsap.to(videoRef.current, {
+          filter: "none",
+          duration: 0.5,
+        });
+      }
     }
+  };
+
+  // Handle video load event
+  const handleVideoLoaded = () => {
+    setVideoLoaded(true);
+    
+    // Animate video opacity once loaded
+    gsap.to(videoRef.current, {
+      opacity: 1,
+      duration: 0.5
+    });
   };
 
   // Animation variants for motion components
@@ -202,23 +339,54 @@ const Sidebar = ({ isVisible, onClose }) => {
       initial="initial"
       animate={isVisible ? "animate" : "exit"}
     >
-      {/* Background overlay with blur effect */}
+      {/* Solid background overlay (for fallback) */}
       <div
         ref={overlayRef}
-        className={`absolute inset-0 bg-black transition-opacity duration-500 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
+        className="absolute inset-0 z-[1000]"
+        style={{ opacity: 0 }}
         onClick={onClose}
         aria-hidden="true"
       />
+      
+      {/* Video container with full-coverage */}
+      <div 
+        ref={videoContainerRef}
+        className="absolute inset-0 overflow-hidden z-[1001]"
+        style={{ opacity: 0 }}
+      >
+        {/* Black background for video to ensure no transparency */}
+        <div className="absolute inset-0 z-[1001]"></div>
+        
+        {/* High-quality video */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover z-[1002]"
+          src="https://res.cloudinary.com/ddiqakvn0/video/upload/v1742292265/Videos/Portfolio/mhudadwn7osl5kpfalmp.mp4"
+          muted
+          playsInline
+          loop
+          preload="auto"
+          style={{ 
+            objectFit: "cover",
+            width: "100%",
+            height: "100%"
+          }}
+          onLoadedData={handleVideoLoaded}
+        />
+        
+        {/* Dark gradient overlay for better text visibility */}
+        <div className="absolute inset-0 bg-zinc-950/20 z-[1003]"></div>
+      </div>
 
-      {/* Ripple effect container for link hover */}
-      <div className="sidebar-bg-ripple absolute rounded-full bg-[#BFFF00] opacity-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      {/* Ripple effect containers for link hover */}
+      <div className="sidebar-bg-ripple absolute rounded-full bg-[#BFFF00] opacity-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1005]" />
+      <div className="sidebar-bg-ripple-1 absolute rounded-full bg-[#BFFF00] opacity-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1005]" />
+      <div className="sidebar-bg-ripple-2 absolute rounded-full bg-[#BFFF00] opacity-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1005]" />
 
       {/* Main sidebar container */}
       <div
         ref={sidebarRef}
-        className="sidebar-main-container"
+        className="sidebar-main-container z-[1006]"
       >
         {/* Social links column */}
         <div className="sidebar-social-links">
@@ -270,10 +438,15 @@ const Sidebar = ({ isVisible, onClose }) => {
                       scale: 1,
                       duration: 0.2,
                       onComplete: () => {
-                        window.scrollTo({
-                          top: parseInt(nav.scrollTop),
-                          behavior: "smooth",
-                        });
+                        // Smooth scroll to section with Lenis when initialized
+                        if (lenisRef.current) {
+                          lenisRef.current.scrollTo(parseInt(nav.scrollTop));
+                        } else {
+                          window.scrollTo({
+                            top: parseInt(nav.scrollTop),
+                            behavior: "smooth",
+                          });
+                        }
                         onClose();
                       },
                     });

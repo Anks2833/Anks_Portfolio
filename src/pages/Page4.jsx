@@ -151,7 +151,7 @@ const Page4 = () => {
         <div 
             id="projects" 
             ref={sectionRef}
-            className="w-full min-h-screen bg-[#0B0D0C] text-white flex flex-col relative overflow-hidden pt-[25vw] pb-20"
+            className="w-full min-h-screen bg-[#0B0D0C] text-white flex flex-col relative overflow-hidden pt-[10vw] pb-20"
         >
             {/* Background elements */}
             <motion.div 

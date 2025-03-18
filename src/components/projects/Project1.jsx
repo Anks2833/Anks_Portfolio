@@ -11,7 +11,7 @@ const Project1 = () => {
       <div
         key={cardData[0].id}
         className='relative w-[23vw] h-[32vw] overflow-hidden group'
-        onMouseEnter={handleMouseEnterBig}
+        onMouseEnter={() => handleMouseEnterBig("PokeInfo")}
         onMouseLeave={handleMouseLeave}
       >
         {/* <h1 className='text-white mb-6 text-2xl font-semibold'>{cardData[0].title}</h1> */}

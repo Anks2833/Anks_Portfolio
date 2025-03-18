@@ -11,7 +11,7 @@ const Project5 = () => {
       <div
         key={cardData[4].id}
         className='relative w-[23vw] h-[32vw] overflow-hidden group'
-        onMouseEnter={handleMouseEnterBig}
+        onMouseEnter={() => handleMouseEnterBig("Vajra.ai")}
         onMouseLeave={handleMouseLeave}
       >
         <div className='image-5 w-full h-full bg-white p-6'>

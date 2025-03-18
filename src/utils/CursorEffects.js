@@ -25,27 +25,10 @@ export const handleMouseEnter = (text = "") => {
     scale: 10,
     duration: 0.3
   });
-  
-  // Show text if provided
-  if (text) {
-    gsap.to('.cursor-text', {
-      opacity: 1,
-      y: '-50px',
-      duration: 0.3,
-      onStart: () => {
-        // Update text content
-        const textEl = document.querySelector('.cursor-text');
-        if (textEl) {
-          textEl.textContent = text;
-        }
-      }
-    });
-  }
 };
 
 // Larger hover effect for prominent elements
 export const handleMouseEnterBig = (text = "") => {
-  // Animate the dot (center)
   gsap.to('.cursor-dot', {
     scale: 1.5,
     backgroundColor: 'white',
@@ -53,7 +36,6 @@ export const handleMouseEnterBig = (text = "") => {
     ease: 'power2.out',
   });
   
-  // Animate the ring
   gsap.to('.cursor-ring', {
     scale: 5,
     borderColor: 'white',
@@ -61,29 +43,12 @@ export const handleMouseEnterBig = (text = "") => {
     ease: 'power2.out',
   });
   
-  // Animate the trail/glow
   gsap.to('.cursor-trail', {
     opacity: 0.2,
-    scale: 20,
+    scale: 10,
     duration: 0.4,
     ease: 'power1.out'
   });
-  
-  // Show text if provided
-  if (text) {
-    gsap.to('.cursor-text', {
-      opacity: 1,
-      y: '-55px',
-      duration: 0.3,
-      onStart: () => {
-        // Update text content
-        const textEl = document.querySelector('.cursor-text');
-        if (textEl) {
-          textEl.textContent = text;
-        }
-      }
-    });
-  }
 };
 
 // Unique style for specific interactive elements (flashing effect)
@@ -109,24 +74,6 @@ export const handleCursorChangeStyle = (text = "") => {
       duration: 0.5,
       ease: 'power1.inOut'
     }, 0);
-  
-  // Show text if provided with special styling
-  if (text) {
-    gsap.to('.cursor-text', {
-      opacity: 1,
-      scale: 1.2,
-      y: '-60px',
-      duration: 0.3,
-      backgroundColor: 'rgba(191, 255, 0, 0.3)',
-      onStart: () => {
-        // Update text content
-        const textEl = document.querySelector('.cursor-text');
-        if (textEl) {
-          textEl.textContent = text;
-        }
-      }
-    });
-  }
 };
 
 // Reset cursor to default state
@@ -154,13 +101,6 @@ export const handleMouseLeave = () => {
   gsap.to('.cursor-trail', {
     scale: 1.5,
     opacity: 0.08,
-    duration: 0.3
-  });
-  
-  // Hide text
-  gsap.to('.cursor-text', {
-    opacity: 0,
-    scale: 1,
     duration: 0.3
   });
 };
@@ -236,22 +176,8 @@ export const handleButtonEnter = (text = "Click") => {
     duration: 0.3,
     ease: 'power2.out',
   });
-  
-  // Show text
-  gsap.to('.cursor-text', {
-    opacity: 1,
-    y: '-50px',
-    duration: 0.3,
-    onStart: () => {
-      const textEl = document.querySelector('.cursor-text');
-      if (textEl) {
-        textEl.textContent = text;
-      }
-    }
-  });
 };
 
-// For compatibility with older code (if needed)
 export const handleOldCursorEnter = () => {
   gsap.to('.custom-cursor', {
     scale: 2,
